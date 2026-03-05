@@ -32,6 +32,13 @@
             font-weight: 900; text-align: center; border-bottom: 1px solid #222;
         }
 
+        /* SEARCH BAR STYLE */
+        .search-container { padding: 15px; background: rgba(0,0,0,0.8); }
+        #search-input { 
+            width: 100%; padding: 12px; border-radius: 10px; border: none; 
+            background: #222; color: white; font-size: 14px; box-sizing: border-box;
+        }
+
         .category-section { padding: 25px 0 0 15px; text-align: left; position: relative; z-index: 1; }
         .category-title { 
             font-size: 13px; text-transform: uppercase; font-weight: 900; 
@@ -78,6 +85,10 @@
     VENDOR FROM CHINA🇨🇳✈️<br>
     PREMIUM QUALITY: NOT GLOBAL❌ ONLY IN ADDISABABA✅<br>
     <span style="color: #888; font-size: 10px; font-weight: 400;">14-20 DAYS DELIVERY</span>
+</div>
+
+<div class="search-container">
+    <input type="text" id="search-input" placeholder="Search for products..." onkeyup="filterProducts()">
 </div>
 
 <div class="category-section">
@@ -182,6 +193,15 @@ const sz = {
     acc: ["Standard"] 
 };
 let currentP = "";
+
+function filterProducts() {
+    let input = document.getElementById('search-input').value.toLowerCase();
+    let cards = document.getElementsByClassName('product-card');
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        cards[i].style.display = name.includes(input) ? "block" : "none";
+    }
+}
 
 function openP(n, t) {
     currentP = n;

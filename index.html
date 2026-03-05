@@ -5,23 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OUMRAN STORE</title>
     <style>
-        :root { --bg: #000; --card: #fff; }
+        :root { --bg: #000; --card: #fff; --tg: #0088cc; }
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             margin:0; background: var(--bg); color: white; 
             overflow-x: hidden; position: relative; min-height: 100vh;
         }
 
-        /* 1. MAXIMUM VISIBILITY LOGO BACKGROUND */
+        /* MAXIMUM VISIBILITY LOGO BACKGROUND */
         #motion-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("IMG_8765.jpeg"); 
-            background-repeat: no-repeat;
-            background-position: center; 
-            background-size: 85%;
-            opacity: 0.92; /* Very light and visible */
-            z-index: -1;
-            filter: brightness(1.7); /* Perfectly clear for the naked eye */
+            background-repeat: no-repeat; background-position: center; 
+            background-size: 85%; opacity: 0.95; z-index: -1;
+            filter: brightness(1.7); 
         }
         
         header { 
@@ -31,13 +28,11 @@
         .header-logo { height: 35px; border-radius: 5px; vertical-align: middle; }
         .brand-name { font-size: 15px; letter-spacing: 2px; font-weight: 900; margin-left: 10px; }
 
-        /* 2. ADDIS ABABA EXCLUSIVE BAR */
         .promo-bar { 
             background: #000; color: #fff; font-size: 11px; padding: 12px; 
             font-weight: 900; text-align: center; border-bottom: 1px solid #222;
         }
 
-        /* 3. SIDEWAYS SCROLLING (FOR ALL ITEMS) */
         .category-section { padding: 25px 0 0 15px; text-align: left; position: relative; z-index: 1; }
         .category-title { 
             font-size: 13px; text-transform: uppercase; font-weight: 900; 
@@ -45,22 +40,14 @@
         }
 
         .scroll-wrapper { 
-            display: flex; 
-            overflow-x: auto; /* FORCED SIDEWAYS */
-            gap: 15px; 
-            padding: 5px 15px 30px 5px;
-            scrollbar-width: none;
+            display: flex; overflow-x: auto; gap: 15px; padding: 5px 15px 30px 5px; scrollbar-width: none;
         }
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
         .product-card { 
-            flex: 0 0 175px; /* Fixed width for sideways rows */
-            background: var(--card); border-radius: 20px; color: black; 
-            overflow: hidden; position: relative;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.7);
-            transition: 0.3s;
+            flex: 0 0 175px; background: var(--card); border-radius: 20px; color: black; 
+            overflow: hidden; position: relative; box-shadow: 0 12px 25px rgba(0,0,0,0.7);
         }
-        .product-card:active { transform: scale(0.95); }
 
         .img-area { height: 175px; background: #f9f9f9; overflow: hidden; }
         .img-area img { width: 100%; height: 100%; object-fit: cover; }
@@ -71,23 +58,21 @@
         .new-p { font-weight: 900; font-size: 17px; color: #000; }
         .old-p { font-size: 12px; text-decoration: line-through; color: #bbb; }
 
-        /* 4. FLOATING TELEGRAM BUTTON */
         .tg-float {
             position: fixed; bottom: 20px; right: 20px;
-            background: #0088cc; color: white; width: 60px; height: 60px;
+            background: var(--tg); color: white; width: 60px; height: 60px;
             border-radius: 50%; display: flex; align-items: center; justify-content: center;
             font-size: 24px; text-decoration: none; z-index: 1000;
             box-shadow: 0 4px 15px rgba(0,136,204,0.4);
-            animation: pulseTg 2s infinite;
         }
-        @keyframes pulseTg { 0% { box-shadow: 0 0 0 0 rgba(0,136,204,0.7); } 70% { box-shadow: 0 0 0 15px rgba(0,136,204,0); } 100% { box-shadow: 0 0 0 0 rgba(0,136,204,0); } }
 
-        /* MODAL */
         .modal { display: none; position: fixed; z-index: 2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.96); backdrop-filter: blur(10px); }
-        .modal-content { background: white; color: black; margin: 20% auto; padding: 30px; width: 80%; max-width: 380px; border-radius: 25px; animation: pop 0.3s ease; }
+        .modal-content { background: white; color: black; margin: 10% auto; padding: 30px; width: 80%; max-width: 380px; border-radius: 25px; }
         .btn { width: 100%; padding: 18px; background: black; color: white; border: none; border-radius: 15px; font-weight: 900; margin-top: 15px; cursor: pointer; }
-
-        @keyframes pop { from { transform: scale(0.9); opacity: 0; } }
+        .btn-tg { background: var(--tg); margin-top: 10px; }
+        
+        #payment-details { display: none; margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px; font-size: 13px; }
+        .contact-box { background: #f9f9f9; padding: 12px; border-radius: 15px; margin-top: 8px; border: 1px solid #eee; text-align: left; }
     </style>
 </head>
 <body>
@@ -107,37 +92,13 @@
 <div class="category-section">
     <div class="category-title">Hoodies & Jackets</div>
     <div class="scroll-wrapper">
-        <div class="product-card" onclick="openP('OUMRAN Street Hoodie', '$35', '$55', 'clothe')">
-            <div class="img-area"><img src="https://via.placeholder.com/400x400/eee?text=Hoodie+1"></div>
+        <div class="product-card" onclick="openP('OUMRAN Street Hoodie', 'clothe')">
+            <div class="img-area"><img src="https://via.placeholder.com/400x400/eee?text=Hoodie"></div>
             <div class="info-area"><h3>Street Hoodie</h3><div class="price-row"><span class="new-p">$35</span><span class="old-p">$55</span></div></div>
         </div>
-        <div class="product-card" onclick="openP('OUMRAN Zip Jacket', '$45', '$65', 'clothe')">
+        <div class="product-card" onclick="openP('OUMRAN Zip Jacket', 'clothe')">
             <div class="img-area"><img src="https://via.placeholder.com/400x400/eee?text=Jacket"></div>
             <div class="info-area"><h3>Zip Jacket</h3><div class="price-row"><span class="new-p">$45</span><span class="old-p">$65</span></div></div>
-        </div>
-    </div>
-</div>
-
-<div class="category-section">
-    <div class="category-title">Exclusive Shoes</div>
-    <div class="scroll-wrapper">
-        <div class="product-card" onclick="openP('Leather Kicks', '$60', '$95', 'shoes')">
-            <div class="img-area"><img src="https://via.placeholder.com/400x400/ddd?text=Shoes"></div>
-            <div class="info-area"><h3>Leather Kicks</h3><div class="price-row"><span class="new-p">$60</span><span class="old-p">$95</span></div></div>
-        </div>
-        <div class="product-card" onclick="openP('Retro Sneakers', '$55', '$80', 'shoes')">
-            <div class="img-area"><img src="https://via.placeholder.com/400x400/ddd?text=Retro"></div>
-            <div class="info-area"><h3>Retro Sneakers</h3><div class="price-row"><span class="new-p">$55</span><span class="old-p">$80</span></div></div>
-        </div>
-    </div>
-</div>
-
-<div class="category-section">
-    <div class="category-title">Jeans & Pants</div>
-    <div class="scroll-wrapper">
-        <div class="product-card" onclick="openP('Baggy Jeans', '$40', '$65', 'clothe')">
-            <div class="img-area"><img src="https://via.placeholder.com/400x400/ccc?text=Jeans"></div>
-            <div class="info-area"><h3>Baggy Jeans</h3><div class="price-row"><span class="new-p">$40</span><span class="old-p">$65</span></div></div>
         </div>
     </div>
 </div>
@@ -146,11 +107,28 @@
 
 <div id="pModal" class="modal">
     <div class="modal-content">
-        <h2 id="m-name" style="margin-top:0;">Product</h2>
+        <h2 id="m-name" style="margin-top:0; font-size: 18px;">Product</h2>
         <label style="font-size: 11px; font-weight: bold; color: #999;">SELECT SIZE</label>
         <select id="size-box" style="width:100%; padding:15px; border-radius:12px; margin-top:8px; font-weight:bold; border: 1px solid #ddd;"></select>
-        <button class="btn" onclick="sendOrder()">Place Order</button>
-        <button class="btn" style="background:#f5f5f5; color:black;" onclick="document.getElementById('pModal').style.display='none'">Go Back</button>
+        
+        <button id="main-order-btn" class="btn" onclick="showPayment()">Place Order</button>
+        
+        <div id="payment-details">
+            <p style="color: #28a745; font-weight: bold; margin: 0;">Order Request Sent! ✅</p>
+            <div class="contact-box">
+                <p style="margin: 0;"><strong>Usernames:</strong></p>
+                <p style="margin: 2px 0;">@OUMER_FETE</p>
+                <p style="margin: 2px 0;">@Afran_Ismael</p>
+                <hr style="border: 0; border-top: 1px solid #ddd; margin: 8px 0;">
+                <p style="margin: 0;"><strong>Telebirr:</strong></p>
+                <p style="margin: 2px 0; font-weight: 900;">0939620004</p>
+                <p style="margin: 2px 0; font-weight: 900;">0940028820</p>
+            </div>
+            <button class="btn btn-tg" onclick="window.location.href='https://t.me/OUMER_FETE'">Message Oumer</button>
+            <button class="btn btn-tg" onclick="window.location.href='https://t.me/Afran_Ismael'">Message Afran</button>
+        </div>
+        
+        <button class="btn" style="background:#f5f5f5; color:black;" onclick="closeModal()">Go Back</button>
     </div>
 </div>
 
@@ -158,21 +136,26 @@
 const sz = { 
     clothe: ["S", "M", "L", "XL"], 
     shoes: ["40", "41", "42", "43", "44"],
-    accessory: ["One Size"],
-    bag: ["Standard Size"]
+    accessory: ["One Size"]
 };
 
-function openP(n, p, t) {
-    document.getElementById("m-name").innerText = n + " (" + p + ")";
+function openP(n, t) {
+    document.getElementById("m-name").innerText = n;
     let b = document.getElementById("size-box");
     b.innerHTML = "";
     (sz[t] || sz.clothe).forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
     document.getElementById("pModal").style.display = "block";
+    document.getElementById("payment-details").style.display = "none";
+    document.getElementById("main-order-btn").style.display = "block";
 }
 
-function sendOrder() {
-    window.location.href = "https://t.me/OUMER_FETE";
+function showPayment() {
+    document.getElementById("payment-details").style.display = "block";
+    document.getElementById("main-order-btn").style.display = "none";
 }
+
+function closeModal() { document.getElementById("pModal").style.display = "none"; }
 </script>
 </body>
 </html>
+

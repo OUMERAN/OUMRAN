@@ -50,7 +50,6 @@
         .scroll-wrapper { display: flex; overflow-x: auto; gap: 15px; padding: 5px 20px 20px 20px; scrollbar-width: none; }
         .scroll-wrapper::-webkit-scrollbar { display: none; }
 
-        /* PRODUCT CARDS - ORIGINAL TALL RATIO */
         .product-card { 
             flex: 0 0 180px; 
             background: var(--card); border-radius: 15px; color: black; 
@@ -124,7 +123,7 @@
 </div>
 
 <div class="category-wrapper">
-    <div class="category-title">Luxury Jackets 🧥</div>
+    <div class="category-title">Jackets & Coats 🧥</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Vintage Suede Jacket', 'clothe')">
             <div class="img-area"><img src="suede_jacket.jpg"></div>
@@ -134,13 +133,31 @@
 </div>
 
 <div class="category-wrapper">
-    <div class="category-title">Premium Footwear 👟</div>
+    <div class="category-title">Trousers & Pants 👖</div>
+    <div class="scroll-wrapper">
+        </div>
+</div>
+
+<div class="category-wrapper">
+    <div class="category-title">Premium Shoes 👟</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Luxury Suede Loafers', 'shoes')">
             <div class="img-area"><img src="lp_loafers.jpg"></div>
             <div class="info-area"><h3>Luxury Suede Loafers</h3><div class="new-p">7,850 ETB</div></div>
         </div>
     </div>
+</div>
+
+<div class="category-wrapper">
+    <div class="category-title">T-Shirts & Tops 👕</div>
+    <div class="scroll-wrapper">
+        </div>
+</div>
+
+<div class="category-wrapper">
+    <div class="category-title">Luxury Watches ⌚</div>
+    <div class="scroll-wrapper">
+        </div>
 </div>
 
 <div class="contact-section">
@@ -179,7 +196,11 @@
 
 <script>
 let cart = [];
-const sz = { clothe: ["S", "M", "L", "XL", "XXL"], shoes: ["40", "41", "42", "43", "44", "45"] };
+const sz = { 
+    clothe: ["S", "M", "L", "XL", "XXL"], 
+    shoes: ["40", "41", "42", "43", "44", "45"],
+    watch: ["Standard"]
+};
 let currentP = "";
 
 function filterProducts() {

@@ -26,32 +26,39 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             opacity: 0;
-            animation: fadeIn 1.5s ease forwards, shine 3s linear infinite;
+            animation: fadeInSplash 1.5s ease forwards, shine 3s linear infinite;
             animation-delay: 0s, 1s;
         }
         .splash-sub { 
             font-size: 10px; color: #666; letter-spacing: 5px; 
             text-transform: uppercase; opacity: 0;
-            animation: fadeIn 2s ease forwards; animation-delay: 0.5s;
+            animation: fadeInSplash 2s ease forwards; animation-delay: 0.5s;
         }
         .splash-exit { transform: translateY(-100%); }
 
-        /* TOAST NOTIFICATION */
+        /* PROFESSIONAL DYNAMIC TOAST */
         #added-toast {
-            position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
-            background: rgba(255, 255, 255, 0.95); color: black; padding: 12px 25px;
-            border-radius: 30px; font-weight: 900; font-size: 14px; z-index: 3000;
-            display: none; box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-            animation: fadeIn 0.3s ease;
+            position: fixed; top: 20px; right: -400px; 
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            color: white; padding: 15px 25px;
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
+            z-index: 5000; font-weight: 600; font-size: 13px;
+            display: flex; align-items: center; gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
         }
+        #added-toast.show { right: 20px; }
+        .toast-icon { background: var(--gold); color: black; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
 
-        @keyframes fadeIn { 
+        @keyframes fadeInSplash { 
             from { opacity: 0; transform: translateY(15px); } 
             to { opacity: 1; transform: translateY(0); } 
         }
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* ORIGINAL STYLES */
+        /* MAIN PAGE STYLES */
         body.modal-open { overflow: hidden !important; height: 100vh; }
         body { 
             font-family: 'Inter', -apple-system, sans-serif; 
@@ -119,7 +126,10 @@
     </div>
 </div>
 
-<div id="added-toast">✅ Item Added to Bag</div>
+<div id="added-toast">
+    <div class="toast-icon">✓</div>
+    <span id="toast-text">Added to Bag</span>
+</div>
 
 <div id="motion-bg"></div>
 
@@ -330,10 +340,13 @@ function addToCart() {
     updateCartDisplay();
     closeModal();
     
-    // SHOW NOTIFICATION TOAST
-    let toast = document.getElementById("added-toast");
-    toast.style.display = "block";
-    setTimeout(() => { toast.style.display = "none"; }, 2000);
+    // TRIGGER PROFESSIONAL TOAST WITH ITEM NAME
+    const toast = document.getElementById("added-toast");
+    const toastText = document.getElementById("toast-text");
+    toastText.innerHTML = `<strong>${currentP}</strong> Added`;
+    
+    toast.classList.add("show");
+    setTimeout(() => { toast.classList.remove("show"); }, 2800);
 }
 
 function removeItem(index) {

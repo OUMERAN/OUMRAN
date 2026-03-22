@@ -2,29 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#000000">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OUMRAN STORE</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     
     <style>
         :root { --bg: #000; --card: #fff; --tg: #0088cc; --accent: #ff3b30; --gold: #FFD700; }
         
-        /* FULL PAGE & BOTTOM BAR FIX */
-        html, body { 
-            height: 100%; margin: 0; padding: 0; 
-            background-color: #000; overflow-x: hidden;
-        }
-        body.no-scroll { overflow: hidden; height: 100vh; }
-
-        /* LUXURY FADE-OUT SPLASH SCREEN */
+        /* UPDATED: LUXURY FADE-OUT SPLASH SCREEN */
         #splash-screen {
-            position: fixed; top: 0; left: 0; width: 100%; 
-            height: 100vh; height: -webkit-fill-available;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: #000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; z-index: 9999;
+            /* Smooth fade transition */
             transition: opacity 1s ease-out, visibility 1s;
         }
         .splash-content { text-align: center; }
@@ -51,7 +41,11 @@
             opacity: 0; animation: fadeInSplash 1s ease forwards; animation-delay: 1s;
         }
         
-        .splash-exit { opacity: 0; visibility: hidden; pointer-events: none; }
+        /* THE FADE EFFECT */
+        .splash-exit { 
+            opacity: 0; 
+            visibility: hidden; 
+        }
 
         @keyframes fadeInSplash { 
             from { opacity: 0; transform: translateY(10px); } 
@@ -77,6 +71,11 @@
 
         /* CORE STORE STYLES */
         body.modal-open { overflow: hidden !important; height: 100vh; }
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            margin:0; background: var(--bg); color: white; 
+            overflow-x: hidden; position: relative; min-height: 100vh;
+        }
         #motion-bg {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("IMG_8765.jpeg"); 
@@ -87,7 +86,6 @@
         header { 
             background: rgba(0,0,0,0.96); padding: 18px; border-bottom: 1px solid #333; 
             position: sticky; top: 0; z-index: 100; text-align: center;
-            padding-top: env(safe-area-inset-top); /* Fix for notch */
         }
         .header-logo { height: 35px; border-radius: 5px; vertical-align: middle; }
         .brand-name { font-size: 15px; letter-spacing: 2px; font-weight: 900; margin-left: 10px; }
@@ -118,8 +116,8 @@
         .info-area h3 { font-size: 11px; margin: 0; color: #444; font-weight: bold; }
         .new-p { font-weight: 900; font-size: 14px; color: #000; margin-top: 5px; }
         
-        .tg-float { position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); right: 20px; background: var(--tg); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; text-decoration: none; z-index: 1000; }
-        .cart-float { position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); left: 20px; background: white; color: black; width: 60px; height: 60px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; z-index: 1000; cursor: pointer; }
+        .tg-float { position: fixed; bottom: 20px; right: 20px; background: var(--tg); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; text-decoration: none; z-index: 1000; }
+        .cart-float { position: fixed; bottom: 20px; left: 20px; background: white; color: black; width: 60px; height: 60px; border-radius: 50%; display: none; align-items: center; justify-content: center; font-size: 24px; z-index: 1000; cursor: pointer; }
         .cart-count { position: absolute; top: 0; right: 0; background: var(--accent); color: white; font-size: 12px; padding: 4px 8px; border-radius: 50%; font-weight: bold; }
         
         .modal { display: none; position: fixed; z-index: 2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.96); backdrop-filter: blur(10px); }
@@ -131,7 +129,7 @@
         .remove-btn { background:#ff3b30; color:white; padding: 6px 12px; border:none; border-radius: 8px; font-size: 10px; font-weight: 900; cursor: pointer; }
     </style>
 </head>
-<body class="no-scroll">
+<body>
 
 <div id="splash-screen">
     <div class="splash-content">
@@ -276,20 +274,6 @@
     </div>
 </div>
 
- <div class="category-section">
-     <div class="category-title">Accessories</div>
-    <div class="scroll-wrapper">
-        <div class="product-card" onclick="openP('USB Starry Sky Atmosphere Light', 'Accessories', 1200)">
-            <div class="img-area"><img src="USB Starry Sky Atmosphere Light.png"></div>
-            <div class="info-area"><h3>USB Starry Sky Atmosphere Light</h3><div class="new-p">1,200 ETB</div></div>
-        </div>
-        <div class="product-card" onclick="openP('Handheld Mini Fan', 'Accessories', 600)">
-            <div class="img-area"><img src="Handheld Mini Fan.jpg"></div>
-            <div class="info-area"><h3>Handheld Mini Fan</h3><div class="new-p">600 ETB</div></div>
-        </div>
-    </div>
-</div>
-    
 <div id="cart-btn" class="cart-float" onclick="showCart()">🛒<span id="cart-count" class="cart-count">0</span></div>
 <a href="https://t.me/OUMER_FETE" class="tg-float">📲</a>
 
@@ -317,8 +301,7 @@
         <div class="payment-info">
             <strong style="color: #0088cc;">Telebirr Payment Info:</strong><br>
             📞 0939620004 | 0940028820<br>
-            <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;">Prices may change slightly depending on supplier stock or shipping. 
-             We'll confirm the final price on Telegram before payment.</span>
+            <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;">Prices may change slightly depending on supplier stock or shipping. We'll confirm the final price on Telegram before payment.</span>
         </div>
         <button id="checkout-btn" class="btn" onclick="submitOrder()">Confirm Order</button>
         <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closeCart()">Close</button>
@@ -338,38 +321,20 @@ let cart = [];
 const sz = { clothe: ["M", "L", "XL", "XXL"], shoes: ["40", "41", "42", "43", "44", "45"], acc: ["Standard"] };
 let currentP = ""; let currentPrice = 0;
 
-// SPLASH & SCROLL FIX
+// FADE DISAPPEAR AFTER 3 SECONDS
 window.onload = function() {
     setTimeout(() => {
-        const splash = document.getElementById('splash-screen');
-        splash.classList.add('splash-exit');
-        document.body.classList.remove('no-scroll');
+        document.getElementById('splash-screen').classList.add('splash-exit');
     }, 3000); 
 };
 
-// IMPROVED SEARCH LOGIC
 function filterProducts() {
     let input = document.getElementById('search-input').value.toLowerCase();
-    let cards = document.querySelectorAll('.product-card');
-    let sections = document.querySelectorAll('.category-section');
-
-    cards.forEach(card => {
-        let name = card.querySelector('h3').innerText.toLowerCase();
-        if (name.includes(input)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
-
-    sections.forEach(sec => {
-        let visibleCardsInSec = Array.from(sec.querySelectorAll('.product-card')).filter(c => c.style.display === "block").length;
-        if (input !== "" && visibleCardsInSec === 0) {
-            sec.style.display = "none";
-        } else {
-            sec.style.display = "block";
-        }
-    });
+    let cards = document.getElementsByClassName('product-card');
+    for (let i = 0; i < cards.length; i++) {
+        let name = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        cards[i].style.display = name.includes(input) ? "block" : "none";
+    }
 }
 
 function openP(n, t, price) {
@@ -378,8 +343,7 @@ function openP(n, t, price) {
     document.getElementById("modal-img").src = event.currentTarget.querySelector('img').src;
     document.body.classList.add('modal-open');
     let b = document.getElementById("size-box"); b.innerHTML = "";
-    let sizeType = (t === 'clothe' || t === 'shoes') ? t : 'acc';
-    sz[sizeType].forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
+    (sz[t] || sz.acc).forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
     document.getElementById("pModal").style.display = "block";
 }
 
@@ -421,7 +385,7 @@ function submitOrder() {
     const name = document.getElementById('custName').value;
     const phone = document.getElementById('custPhone').value;
     const address = document.getElementById('custAddress').value || "No address provided";
-    if(!name || !phone) { alert("Please enter Name and phone number!"); return; }
+    if(!name || !phone) { alert("Please enter Name,phone number and Adress!"); return; }
     
     const botToken = "8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc";
     const chatId = "5715582254";
@@ -436,7 +400,6 @@ function submitOrder() {
     }).then(() => {
         document.getElementById("cartModal").style.display = "none";
         document.getElementById("successModal").style.display = "block";
-        cart = []; updateCartDisplay();
     });
 }
 function closeModal() { document.body.classList.remove('modal-open'); document.getElementById("pModal").style.display = "none"; }

@@ -9,12 +9,11 @@
     <style>
         :root { --bg: #000; --card: #fff; --tg: #0088cc; --accent: #ff3b30; --gold: #FFD700; }
         
-        /* UPDATED: LUXURY FADE-OUT SPLASH SCREEN */
+        /* LUXURY FADE-OUT SPLASH SCREEN */
         #splash-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
             background: #000; display: flex; flex-direction: column;
             align-items: center; justify-content: center; z-index: 9999;
-            /* Smooth fade transition */
             transition: opacity 1s ease-out, visibility 1s;
         }
         .splash-content { text-align: center; }
@@ -41,11 +40,7 @@
             opacity: 0; animation: fadeInSplash 1s ease forwards; animation-delay: 1s;
         }
         
-        /* THE FADE EFFECT */
-        .splash-exit { 
-            opacity: 0; 
-            visibility: hidden; 
-        }
+        .splash-exit { opacity: 0; visibility: hidden; }
 
         @keyframes fadeInSplash { 
             from { opacity: 0; transform: translateY(10px); } 
@@ -164,19 +159,19 @@
     <div class="category-title">Graphic T-Shirts 👕</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('black polo t-shirt', 'clothe', 2200)">
-            <div class="img-area"><img src="black_zip_polo.jpg"></div>
+            <div class="img-area"><img src="black_zip_polo.jpg" alt="black polo t-shirt"></div>
             <div class="info-area"><h3>black polo t-shirt</h3><div class="new-p">2,200 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Half zipped black t-shirt', 'clothe', 1800)">
-            <div class="img-area"><img src="Half zipped black t-shirt.jpg"></div>
+            <div class="img-area"><img src="Half zipped black t-shirt.jpg" alt="Half zipped black t-shirt"></div>
             <div class="info-area"><h3>Half zipped black t-shirt</h3><div class="new-p">1,800 ETB</div></div> 
         </div>
         <div class="product-card" onclick="openP('Lapel Short-Sleeved Sweater', 'clothe', 1600)">
-            <div class="img-area"><img src="Lapel Short-Sleeved Sweater.jpg"></div>
+            <div class="img-area"><img src="Lapel Short-Sleeved Sweater.jpg" alt="Lapel Short-Sleeved Sweater"></div>
             <div class="info-area"><h3>Lapel Short-Sleeved Sweater</h3><div class="new-p">1,600 ETB</div></div> 
         </div>
         <div class="product-card" onclick="openP('Strip knit t-shirt', 'clothe', 2850)">
-            <div class="img-area"><img src="Strip knit t-shirt.jpg"></div>
+            <div class="img-area"><img src="Strip knit t-shirt.jpg" alt="Strip knit t-shirt"></div>
             <div class="info-area"><h3>Strip knit t-shirt</h3><div class="new-p">2,850 ETB</div></div> 
         </div>
     </div>
@@ -186,31 +181,31 @@
     <div class="category-title">Hoodies & Sweaters 🧶</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Polo knit sweater', 'clothe', 2500)">
-            <div class="img-area"><img src="Polo knit sweater.jpg"></div>
+            <div class="img-area"><img src="Polo knit sweater.jpg" alt="Polo knit sweater"></div>
             <div class="info-area"><h3>Polo knit sweater</h3><div class="new-p">2,500 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Black Textured Sweatshirt', 'clothe', 2800)">
-            <div class="img-area"><img src="Black Textured Sweatshirt.jpg"></div>
+            <div class="img-area"><img src="Black Textured Sweatshirt.jpg" alt="Black Textured Sweatshirt"></div>
             <div class="info-area"><h3>Black Textured Sweatshirt</h3><div class="new-p">2,800 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Half-Zip Sweater', 'clothe', 2400)">
-            <div class="img-area"><img src="Half-Zip Sweater.jpg"></div>
+            <div class="img-area"><img src="Half-Zip Sweater.jpg" alt="Half-Zip Sweater"></div>
             <div class="info-area"><h3>Half-Zip Sweater</h3><div class="new-p">2,400 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Polo cable knit collar soft sweater', 'clothe', 3000)">
-            <div class="img-area"><img src="Polo cable knit collar soft sweater.jpg"></div>
+            <div class="img-area"><img src="Polo cable knit collar soft sweater.jpg" alt="Polo cable knit collar soft sweater"></div>
             <div class="info-area"><h3>Polo cable knit collar soft sweater</h3><div class="new-p">3,000 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Versatile Polo Cable-Knit Sweater', 'clothe', 3500)">
-            <div class="img-area"><img src="Versatile Polo Cable-Knit Sweater.jpg"></div>
+            <div class="img-area"><img src="Versatile Polo Cable-Knit Sweater.jpg" alt="Versatile Polo Cable-Knit Sweater"></div>
             <div class="info-area"><h3>Versatile Polo Cable-Knit Sweater</h3><div class="new-p">3,500 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Denim tears Hoodie', 'clothe', 3500)">
-            <div class="img-area"><img src="Denim tears Hoodie.jpg"></div>
+            <div class="img-area"><img src="Denim tears Hoodie.jpg" alt="Denim tears Hoodie"></div>
             <div class="info-area"><h3>Denim tears Hoodie</h3><div class="new-p">3,500 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Alo official casual half zip sweater', 'clothe', 3000)">
-            <div class="img-area"><img src="Alo official casual half zip sweater.jpg"></div>
+            <div class="img-area"><img src="Alo official casual half zip sweater.jpg" alt="Alo official casual half zip sweater"></div>
             <div class="info-area"><h3>Alo official casual half zip sweater</h3><div class="new-p">3,000 ETB</div></div>
         </div>
     </div>
@@ -220,15 +215,15 @@
     <div class="category-title">Jackets 🧥</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Suede vintage jacket', 'clothe', 2800)">
-            <div class="img-area"><img src="Suede vintage jacket.jpg"></div>
+            <div class="img-area"><img src="Suede vintage jacket.jpg" alt="Suede vintage jacket"></div>
             <div class="info-area"><h3>Suede vintage jacket</h3><div class="new-p">2,800 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('American Retro Stand-Collar Jacket', 'clothe', 3250)">
-            <div class="img-area"><img src="American Retro Stand-Collar Jacket.jpg"></div>
+            <div class="img-area"><img src="American Retro Stand-Collar Jacket.jpg" alt="American Retro Stand-Collar Jacket"></div>
             <div class="info-area"><h3>American Retro Stand-Collar Jacket</h3><div class="new-p">3,250 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Lapel Corduroy Pocket Jacket', 'clothe', 3000)">
-            <div class="img-area"><img src="Lapel Corduroy Pocket Jacket.jpg"></div>
+            <div class="img-area"><img src="Lapel Corduroy Pocket Jacket.jpg" alt="Lapel Corduroy Pocket Jacket"></div>
             <div class="info-area"><h3>Lapel Corduroy Pocket Jacket</h3><div class="new-p">3,000 ETB</div></div> 
         </div>
     </div>
@@ -238,23 +233,23 @@
     <div class="category-title">Jeans & Pants 👖</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Broken Planet Suede Loose Straight Casual Men’s Pants', 'clothe', 2850)">
-            <div class="img-area"><img src="Broken Planet Suede Loose Straight Casual Men’s Pants.jpg"></div>
+            <div class="img-area"><img src="Broken Planet Suede Loose Straight Casual Men’s Pants.jpg" alt="Broken Planet Suede Pants"></div>
             <div class="info-area"><h3>Broken Planet Suede Pants</h3><div class="new-p">2,850 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Broken Planet Fleece Sweatpants', 'clothe', 2500)">
-            <div class="img-area"><img src="Broken Planet Fleece Sweatpants.jpg"></div>
+            <div class="img-area"><img src="Broken Planet Fleece Sweatpants.jpg" alt="Broken Planet Fleece"></div>
             <div class="info-area"><h3>Broken Planet Fleece</h3><div class="new-p">2,500 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Loose Hip-Hop polo Streetwear Sweatpants', 'clothe', 2850)">
-            <div class="img-area"><img src="Loose Hip-Hop polo Streetwear Sweatpants.jpg"></div>
+            <div class="img-area"><img src="Loose Hip-Hop polo Streetwear Sweatpants.jpg" alt="Streetwear Sweatpants"></div>
             <div class="info-area"><h3>Streetwear Sweatpants</h3><div class="new-p">2,850 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Denim tears Sweatpants', 'clothe', 2850)">
-            <div class="img-area"><img src="Denim tears Sweatpants.jpg"></div>
+            <div class="img-area"><img src="Denim tears Sweatpants.jpg" alt="Denim tears Sweatpants"></div>
             <div class="info-area"><h3>Denim tears Sweatpants</h3><div class="new-p">2,850 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Wide-Leg High Street Casual Jeans', 'clothe', 2850)">
-            <div class="img-area"><img src="Wide-Leg High Street Casual Jeans.jpg"></div>
+            <div class="img-area"><img src="Wide-Leg High Street Casual Jeans.jpg" alt="Wide-Leg Casual Jeans"></div>
             <div class="info-area"><h3>Wide-Leg Casual Jeans</h3><div class="new-p">2,850 ETB</div></div>
         </div>
     </div>
@@ -264,22 +259,22 @@
     <div class="category-title">Full Outfits 👔</div>
     <div class="scroll-wrapper">
         <div class="product-card" onclick="openP('Essentials-Style Tracksuit', 'clothe', 6000)">
-            <div class="img-area"><img src="Essentials-Style Tracksuit.jpg"></div>
+            <div class="img-area"><img src="Essentials-Style Tracksuit.jpg" alt="Essentials-Style Tracksuit"></div>
             <div class="info-area"><h3>Essentials-Style Tracksuit</h3><div class="new-p">6,000 ETB</div></div>
         </div>
         <div class="product-card" onclick="openP('Denim tears-Style tracksuit', 'clothe', 7000)">
-            <div class="img-area"><img src="Denim tears-Style tracksuit .jpg"></div>
+            <div class="img-area"><img src="Denim tears-Style tracksuit .jpg" alt="Denim tears-Style tracksuit"></div>
             <div class="info-area"><h3>Denim tears-Style tracksuit</h3><div class="new-p">7,000 ETB</div></div>
         </div>
     </div>
 </div>
 
 <div id="cart-btn" class="cart-float" onclick="showCart()">🛒<span id="cart-count" class="cart-count">0</span></div>
-<a href="https://t.me/OUMER_FETE" class="tg-float">📲</a>
+<a href="https://t.me/OUMER_FETE" class="tg-float" target="_blank">📲</a>
 
 <div id="pModal" class="modal">
     <div class="modal-content">
-        <img id="modal-img" style="width:100%; border-radius:15px; margin-bottom:15px; object-fit: cover; max-height: 350px;">
+        <img id="modal-img" alt="Product Image" style="width:100%; border-radius:15px; margin-bottom:15px; object-fit: cover; max-height: 350px;">
         <h2 id="m-name" style="margin-top:0; font-family: 'Playfair Display', serif;">Product</h2>
         <label style="font-size: 11px; font-weight: bold; color: #999;">SELECT SIZE</label>
         <select id="size-box" class="order-input"></select>
@@ -301,7 +296,7 @@
         <div class="payment-info">
             <strong style="color: #0088cc;">Telebirr Payment Info:</strong><br>
             📞 0939620004 | 0940028820<br>
-            <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;">Prices may change slightly depending on supplier stock or shipping. We'll confirm the final price on Telegram before payment.</span>
+            <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;"> Prices may change slightly depending on supplier stock or shipping. We'll confirm the final price on Telegram before payment. </span>
         </div>
         <button id="checkout-btn" class="btn" onclick="submitOrder()">Confirm Order</button>
         <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closeCart()">Close</button>
@@ -310,7 +305,8 @@
 
 <div id="successModal" class="modal">
     <div class="modal-content" style="text-align: center;">
-        <h2 style="font-family: 'Playfair Display', serif; color: var(--gold);">Order Received,Thank you for shopping with OUMRAN STORE!✨For more information and payment screenshot we will direct you to our telegram channel!</h2>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); ">Order Received,
+Thank you for shopping with OUMRAN STORE!✨For more information and payment screenshot we will direct you to our telegram channel!</h2>
         <p>Redirecting to Telegram...</p>
         <button class="btn" onclick="window.location.href='https://t.me/OUMER_FETE'">Open Telegram</button>
     </div>
@@ -319,31 +315,43 @@
 <script>
 let cart = [];
 const sz = { clothe: ["M", "L", "XL", "XXL"], shoes: ["40", "41", "42", "43", "44", "45"], acc: ["Standard"] };
-let currentP = ""; let currentPrice = 0;
+let currentP = ""; 
+let currentPrice = 0;
 
-// FADE DISAPPEAR AFTER 3 SECONDS
-window.onload = function() {
+// SPLASH SCREEN LOGIC
+window.addEventListener('load', () => {
     setTimeout(() => {
-        document.getElementById('splash-screen').classList.add('splash-exit');
+        const splash = document.getElementById('splash-screen');
+        splash.classList.add('splash-exit');
     }, 3000); 
-};
+});
 
 function filterProducts() {
     let input = document.getElementById('search-input').value.toLowerCase();
     let cards = document.getElementsByClassName('product-card');
     for (let i = 0; i < cards.length; i++) {
-        let name = cards[i].getElementsByTagName('h3')[0].innerText.toLowerCase();
+        let name = cards[i].querySelector('h3').innerText.toLowerCase();
         cards[i].style.display = name.includes(input) ? "block" : "none";
     }
 }
 
 function openP(n, t, price) {
-    currentP = n; currentPrice = price;
+    currentP = n; 
+    currentPrice = price;
     document.getElementById("m-name").innerText = n;
-    document.getElementById("modal-img").src = event.currentTarget.querySelector('img').src;
+    
+    // Updated image selection logic
+    const clickedCard = event.currentTarget;
+    document.getElementById("modal-img").src = clickedCard.querySelector('img').src;
+    
     document.body.classList.add('modal-open');
-    let b = document.getElementById("size-box"); b.innerHTML = "";
-    (sz[t] || sz.acc).forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
+    let b = document.getElementById("size-box"); 
+    b.innerHTML = "";
+    (sz[t] || sz.acc).forEach(s => { 
+        let o = document.createElement("option"); 
+        o.text = s; 
+        b.add(o); 
+    });
     document.getElementById("pModal").style.display = "block";
 }
 
@@ -351,6 +359,7 @@ function addToCart() {
     cart.push({ name: currentP, size: document.getElementById("size-box").value, price: currentPrice });
     updateCartDisplay();
     closeModal();
+    
     const toast = document.getElementById("added-toast");
     const toastText = document.getElementById("toast-text");
     toastText.innerHTML = `<strong>${currentP}</strong> Added`;
@@ -369,7 +378,12 @@ function showCart() {
     const list = document.getElementById("cart-items-list");
     list.innerHTML = cart.map((item, i) => {
         total += item.price;
-        return `<div class="cart-item"><span><strong>${item.name}</strong> (${item.size})<br><span style="color:var(--gold);">${item.price.toLocaleString()} ETB</span></span><button class="remove-btn" onclick="removeItem(${i})">REMOVE</button></div>`;
+        return `
+            <div class="cart-item">
+                <span><strong>${item.name}</strong> (${item.size})<br>
+                <span style="color:var(--gold);">${item.price.toLocaleString()} ETB</span></span>
+                <button class="remove-btn" onclick="removeItem(${i})">REMOVE</button>
+            </div>`;
     }).join("");
     document.getElementById("cart-total").innerText = total.toLocaleString();
     document.getElementById("cartModal").style.display = "block";
@@ -385,13 +399,17 @@ function submitOrder() {
     const name = document.getElementById('custName').value;
     const phone = document.getElementById('custPhone').value;
     const address = document.getElementById('custAddress').value || "No address provided";
-    if(!name || !phone) { alert("Please enter Name,phone number and Adress!"); return; }
+    
+    if(!name || !phone) { 
+        alert("Please enter Name and phone number!"); 
+        return; 
+    }
     
     const botToken = "8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc";
     const chatId = "5715582254";
     
     let itemsStr = cart.map(i => `▫️ ${i.name} (${i.size}) - ${i.price} ETB`).join("\n");
-    let text = `🛍️ *NEW ORDER*\n👤 ${name}\n📞 ${phone}\n📍 ${address}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
+    let text = `🛍️ *NEW ORDER*\n👤 Name: ${name}\n📞 Phone: ${phone}\n📍 Address: ${address}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
     
     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: "POST",
@@ -400,10 +418,23 @@ function submitOrder() {
     }).then(() => {
         document.getElementById("cartModal").style.display = "none";
         document.getElementById("successModal").style.display = "block";
+        cart = []; // Clear cart after order
+        updateCartDisplay();
+    }).catch(err => {
+        alert("Error sending order. Please try again.");
     });
 }
+
 function closeModal() { document.body.classList.remove('modal-open'); document.getElementById("pModal").style.display = "none"; }
 function closeCart() { document.body.classList.remove('modal-open'); document.getElementById("cartModal").style.display = "none"; }
+
+// Close modals when clicking outside the content
+window.onclick = function(event) {
+    const pModal = document.getElementById("pModal");
+    const cartModal = document.getElementById("cartModal");
+    if (event.target == pModal) closeModal();
+    if (event.target == cartModal) closeCart();
+}
 </script>
 </body>
 </html>

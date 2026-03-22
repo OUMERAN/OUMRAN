@@ -9,8 +9,9 @@
     <style>
         :root { --bg: #000; --card: #fff; --tg: #0088cc; --accent: #ff3b30; --gold: #FFD700; }
         
-        /* HARD SCROLL LOCK FOR MOBILE - PREVENTS BOUNCING */
-        html.loading, body.loading { 
+        /* HARD SCROLL LOCK FOR SPLASH AND MODALS */
+        html.loading, body.loading, 
+        html.modal-open, body.modal-open { 
             overflow: hidden !important; 
             height: 100% !important; 
             position: fixed; 
@@ -320,7 +321,7 @@
 <div id="successModal" class="modal">
     <div class="modal-content" style="text-align: center;">
         <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); ">Order Received!✨</h2>
-        <p>Thank you for shopping with OUMRAN STORE!For more information and payment screenshot We will direct you to our Telegram channel.</p>
+        <p>Thank you for shopping! We will direct you to our Telegram channel for confirmation.</p>
         <button class="btn" onclick="window.location.href='https://t.me/OUMER_FETE'">Open Telegram</button>
     </div>
 </div>
@@ -367,7 +368,11 @@ function openP(n, t, price) {
     document.getElementById("m-name").innerText = n;
     const clickedCard = event.currentTarget;
     document.getElementById("modal-img").src = clickedCard.querySelector('img').src;
+    
+    // LOCK SCROLL
+    document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
+
     let b = document.getElementById("size-box"); b.innerHTML = "";
     (sz[t] || sz.acc).forEach(s => { 
         let o = document.createElement("option"); o.text = s; b.add(o); 
@@ -390,7 +395,10 @@ function updateCartDisplay() {
 }
 
 function showCart() {
+    // LOCK SCROLL
+    document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
+
     let total = 0;
     const list = document.getElementById("cart-items-list");
     list.innerHTML = cart.map((item, i) => {
@@ -433,8 +441,18 @@ function submitOrder() {
     });
 }
 
-function closeModal() { document.body.classList.remove('modal-open'); document.getElementById("pModal").style.display = "none"; }
-function closeCart() { document.body.classList.remove('modal-open'); document.getElementById("cartModal").style.display = "none"; }
+function closeModal() { 
+    // UNLOCK SCROLL
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.getElementById("pModal").style.display = "none"; 
+}
+function closeCart() { 
+    // UNLOCK SCROLL
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.getElementById("cartModal").style.display = "none"; 
+}
 
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) { closeModal(); closeCart(); }

@@ -62,6 +62,7 @@
 
         #added-toast {
             position: fixed; top: 20px; right: -400px; 
+            visibility: hidden;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             color: white; padding: 15px 25px;
@@ -69,10 +70,10 @@
             z-index: 5000; font-weight: 600; font-size: 13px;
             display: flex; align-items: center; gap: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             white-space: nowrap;
         }
-        #added-toast.show { right: 20px; }
+        #added-toast.show { right: 20px; visibility: visible; }
         .toast-icon { background: var(--gold); color: black; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; }
 
         body { 
@@ -387,9 +388,13 @@ function addToCart() {
     cart.push({ name: currentP, size: document.getElementById("size-box").value, price: currentPrice });
     updateCartDisplay(); closeModal();
     const toast = document.getElementById("added-toast");
-    document.getElementById("toast-text").innerHTML = `<strong>${currentP}</strong> Added`;
+    const tText = document.getElementById("toast-text");
+    tText.innerHTML = `<strong>${currentP}</strong> Added`;
     toast.classList.add("show");
-    setTimeout(() => { toast.classList.remove("show"); }, 2800);
+    setTimeout(() => { 
+        toast.classList.remove("show");
+        setTimeout(() => { tText.innerHTML = ""; }, 500);
+    }, 2800);
 }
 
 function updateCartDisplay() {

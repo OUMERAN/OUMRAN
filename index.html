@@ -145,8 +145,10 @@
             overflow: hidden; position: relative; box-shadow: 0 12px 25px rgba(0,0,0,0.5);
             transition: transform 0.3s ease; cursor:pointer;
         }
+        /* INTACT RATIO FIX */
         .img-area { height: 220px; background: #f9f9f9; overflow: hidden; }
-        .img-area img { width: 100%; height: 100%; object-fit: cover; }
+        .img-area img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 1/1; }
+        
         .info-area { padding: 12px; }
         .info-area h3 { font-size: 11px; margin: 0; color: #444; font-weight: bold; height: 30px; overflow: hidden; }
         .new-p { font-weight: 900; font-size: 14px; color: #000; margin-top: 5px; }
@@ -162,6 +164,9 @@
         .payment-info { background: #222; padding: 12px; border-radius: 12px; margin-top: 15px; font-size: 13px; border-left: 4px solid #0088cc; color: #ccc; }
         .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #333; font-size: 14px; }
         .remove-btn { background:#ff3b30; color:white; padding: 6px 12px; border:none; border-radius: 8px; font-size: 10px; font-weight: 900; cursor: pointer; }
+        
+        /* PRICE UPDATER DISPLAY */
+        .modal-price { font-size: 22px; font-weight: 900; color: var(--gold); margin: 10px 0; display: block; }
     </style>
 </head>
 <body class="loading">
@@ -312,8 +317,10 @@
 
 <div id="pModal" class="modal">
     <div class="modal-content">
-        <img id="modal-img" alt="Product Image" style="width:100%; border-radius:15px; margin-bottom:15px; object-fit: cover; max-height: 500px;">
-        <h2 id="m-name" style="margin-top:0; font-family: 'Playfair Display', serif;">Product</h2>
+        <img id="modal-img" alt="Product Image" style="width:100%; border-radius:15px; margin-bottom:15px; object-fit: cover; aspect-ratio: 1/1; max-height: 500px;">
+        <h2 id="m-name" style="margin-top:0; font-family: 'Playfair Display', serif; margin-bottom: 5px;">Product</h2>
+        
+        <span id="m-price" class="modal-price">0 ETB</span>
         
         <div id="variant-area" class="variant-section">
             <span class="variant-label">Select Color/Style</span>
@@ -395,6 +402,10 @@ function filterProducts() {
 function openP(n, t, price) {
     currentP = n; currentPrice = price;
     document.getElementById("m-name").innerText = n;
+    
+    // UPDATER LOGIC FOR MODAL PRICE
+    document.getElementById("m-price").innerText = price.toLocaleString() + " ETB";
+    
     const clickedCard = event.currentTarget;
     const defaultImg = clickedCard.querySelector('img').src;
     document.getElementById("modal-img").src = defaultImg;
@@ -419,7 +430,6 @@ function openP(n, t, price) {
                 this.classList.add('active');
             };
             
-            // This part removes the text labels and prevents the "undefined" error
             let nameHtml = (v.name && v.name.trim() !== "") ? `<span>${v.name}</span>` : "";
             item.innerHTML = `<img src="${v.img}">${nameHtml}`;
             variantList.appendChild(item);

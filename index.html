@@ -373,6 +373,7 @@ document.body.classList.add('loading');
 
 window.addEventListener('load', () => {
     window.scrollTo(0, 0);
+    loadCart(); // <--- NEW: Loads cart when page opens
     setTimeout(() => {
         document.getElementById('splash-screen').classList.add('splash-exit');
         document.documentElement.classList.remove('loading');
@@ -465,6 +466,7 @@ function addToCart() {
 function updateCartDisplay() {
     document.getElementById("cart-count").innerText = cart.length;
     document.getElementById("cart-btn").style.display = cart.length > 0 ? "flex" : "none";
+    saveCart(); // <--- NEW: Saves cart every time it updates
 }
 
 function showCart() {
@@ -509,7 +511,9 @@ function submitOrder() {
     }).then(() => {
         document.getElementById("cartModal").style.display = "none";
         document.getElementById("successModal").style.display = "block";
-        cart = []; updateCartDisplay();
+        cart = []; 
+        localStorage.removeItem('oumer_cart'); // Clear storage after order
+        updateCartDisplay();
     });
 }
 
@@ -527,6 +531,20 @@ function closeCart() {
 
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) { closeModal(); closeCart(); }
+}
+
+// --- PERSISTENT CART LOGIC (ADDED BELOW) ---
+
+function saveCart() {
+    localStorage.setItem('oumer_cart', JSON.stringify(cart));
+}
+
+function loadCart() {
+    const savedCart = localStorage.getItem('oumer_cart');
+    if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCartDisplay();
+    }
 }
 </script>
 </body>

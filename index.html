@@ -8,12 +8,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@400;900&display=swap" rel="stylesheet">
     
    <style>
-       /* REMOVE DARK BACKGROUND ONLY FOR PRODUCT MODAL */
+     /* CLEAN LIGHT OVERLAY FOR PRODUCT MODAL (NOT FULL BLACK) */
 #pModal.modal {
-    background: transparent !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-}
+    background: rgba(0, 0, 0, 0.3) !important;
+    backdrop-filter: blur(4px) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+}  
         :root { --bg: #000; --card: #fff; --tg: #0088cc; --accent: #ff3b30; --gold: #FFD700; }
         
         /* UPDATED: Scaling for Laptop/Tablet */

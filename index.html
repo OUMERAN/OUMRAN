@@ -541,7 +541,12 @@ function addToCart() {
     let selectedColor = "";
     const activeVariant = document.querySelector('.variant-item.active span');
     if(activeVariant) selectedColor = ` [${activeVariant.innerText}]`;
-    cart.push({ name: currentP + selectedColor, size: document.getElementById("size-box").value, price: currentPrice });
+    cart.push({ 
+    name: currentP, 
+    variant: activeVariant ? activeVariant.innerText : "", 
+    size: document.getElementById("size-box").value, 
+    price: currentPrice });
+
     updateCartDisplay(); closeModal();
     const toast = document.getElementById("added-toast");
     const tText = document.getElementById("toast-text");

@@ -20,7 +20,6 @@
 
         .site-wrapper { width: 100%; max-width: 1400px; margin: 0 auto; }
 
-        /* Strict Background Lock */
         html.loading, body.loading, html.modal-open, body.modal-open { 
             overflow: hidden !important; height: 100% !important; position: fixed; width: 100%; touch-action: none; 
         }
@@ -59,14 +58,12 @@
         @keyframes fadeInSplash { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* UPDATED: About Link & Page */
         .about-link { color: var(--gold); font-size: 12px; font-weight: 900; text-decoration: underline; cursor: pointer; margin-top: 5px; display: inline-block; }
         #aboutPage { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: #000; z-index: 9999; overflow-y: auto; padding: 40px 20px; box-sizing: border-box; }
         .about-content { max-width: 600px; margin: 0 auto; text-align: center; }
         .about-content h2 { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 20px; }
         .about-content p { line-height: 1.8; color: #ccc; font-size: 15px; margin-bottom: 20px; }
 
-        /* UPDATED: Straight Arrow-based Zoom Gallery */
         #zoom-container {
             display: none; position: fixed; top:0; left:0; width:100%; height:100%;
             background: #000; z-index: 9999; flex-direction: column; justify-content: center; align-items: center;
@@ -102,8 +99,9 @@
         .variant-label { font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; margin-bottom: 8px; display: block; }
         .variant-scroll { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
         .variant-scroll::-webkit-scrollbar { display: none; }
-        .variant-item { flex: 0 0 65px; height: 65px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; overflow: hidden; transition: 0.2s; }
+        .variant-item { flex: 0 0 65px; height: 65px; border-radius: 8px; border: 2px solid transparent; cursor: pointer; overflow: hidden; transition: 0.2s; position: relative; }
         .variant-item img { width: 100%; height: 100%; object-fit: cover; }
+        .variant-item span { display: none !important; }
         .variant-item.active { border-color: var(--gold); }
 
         .rec-title { font-size: 13px; font-weight: 900; color: var(--gold); margin: 25px 0 10px; border-top: 1px solid #333; padding-top: 20px; text-transform: uppercase; letter-spacing: 1px; }
@@ -149,7 +147,6 @@
 </head>
 <body class="loading">
 
-<!-- UPDATED: Straight Arrow-Based Zoom -->
 <div id="zoom-container">
     <div class="zoom-stage">
         <button class="zoom-arrow arrow-left" onclick="changeZoom(-1)">&lt;</button>
@@ -159,7 +156,6 @@
     <button class="zoom-close" onclick="closeZoom()">Close Gallery</button>
 </div>
 
-<!-- UPDATED: About Us Full Page -->
 <div id="aboutPage">
     <div class="about-content">
         <h2>About OUMRAN STORE</h2>
@@ -198,19 +194,19 @@
     </div>
 
     <main id="store-main">
-        <!-- ALL PRODUCTS RETAINED -->
+        <!-- FIXED VARIANT DATA NAMES -->
         <div class="category-section">
             <div class="category-title">Graphic T-Shirts 👕</div>
             <div class="scroll-wrapper"> 
-                <div class="product-card" onclick="openP('Half zipped black t-shirt', 'clothe', 1800)" data-variants='[{"img":"Half zipped black t-shirt.jpg"},{"img":"White .jpg"}]'>
+                <div class="product-card" onclick="openP('Half zipped black t-shirt', 'clothe', 1800)" data-variants='[{"name":"1","img":"Half zipped black t-shirt.jpg"},{"name":"2","img":"White .jpg"}]'>
                     <div class="img-area"><img src="Half zipped black t-shirt.jpg"></div>
                     <div class="info-area"><h3>Half zipped black t-shirt</h3><div class="new-p">1,800 ETB</div></div> 
                 </div>
-                <div class="product-card" onclick="openP('Lapel Short-Sleeved Sweater', 'clothe', 1600)" data-variants='[{"img":"Lapel Short-Sleeved Sweater.jpg"},{"img":"Lapel sweatshirt .jpg"}]'>
+                <div class="product-card" onclick="openP('Lapel Short-Sleeved Sweater', 'clothe', 1600)" data-variants='[{"name":"1","img":"Lapel Short-Sleeved Sweater.jpg"},{"name":"2","img":"Lapel sweatshirt .jpg"}]'>
                     <div class="img-area"><img src="Lapel Short-Sleeved Sweater.jpg"></div>
                     <div class="info-area"><h3>Lapel Short-Sleeved Sweater</h3><div class="new-p">1,600 ETB</div></div> 
                 </div>
-                <div class="product-card" onclick="openP('Strip knit t-shirt', 'clothe', 2850)" data-variants='[{"img":"Strip knit t-shirt.jpg"},{"img":"Striped.jpg"},{"img":"Stripe t-shirt.jpg"}]'>
+                <div class="product-card" onclick="openP('Strip knit t-shirt', 'clothe', 2850)" data-variants='[{"name":"1","img":"Strip knit t-shirt.jpg"},{"name":"2","img":"Striped.jpg"},{"name":"3","img":"Stripe t-shirt.jpg"}]'>
                     <div class="img-area"><img src="Strip knit t-shirt.jpg"></div>
                     <div class="info-area"><h3>Strip knit t-shirt</h3><div class="new-p">2,850 ETB</div></div>
                 </div>
@@ -220,27 +216,27 @@
         <div class="category-section">
             <div class="category-title">Hoodies & Sweaters 🧶</div>
             <div class="scroll-wrapper">
-                <div class="product-card" onclick="openP('Polo knit sweater', 'clothe', 2500)" data-variants='[{"img":"Polo knit sweater.jpg"},{"img":"Knit polo.jpg"},{"img":"Polo knit.jpg"}]'>
+                <div class="product-card" onclick="openP('Polo knit sweater', 'clothe', 2500)" data-variants='[{"name":"1","img":"Polo knit sweater.jpg"},{"name":"2","img":"Knit polo.jpg"},{"name":"3","img":"Polo knit.jpg"}]'>
                     <div class="img-area"><img src="Polo knit sweater.jpg"></div>
                     <div class="info-area"><h3>Polo knit sweater</h3><div class="new-p">2,500 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Half-Zip Sweater', 'clothe', 2400)" data-variants='[{"img":"Half-Zip Sweater.jpg"},{"img":"Half zip.jpg"},{"img":"half zip.jpg"}]'>
+                <div class="product-card" onclick="openP('Half-Zip Sweater', 'clothe', 2400)" data-variants='[{"name":"1","img":"Half-Zip Sweater.jpg"},{"name":"2","img":"Half zip.jpg"},{"name":"3","img":"half zip.jpg"}]'>
                     <div class="img-area"><img src="Half-Zip Sweater.jpg"></div>
                     <div class="info-area"><h3>Half-Zip Sweater</h3><div class="new-p">2,400 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Polo cable knit sweater', 'clothe', 3000)" data-variants='[{"img":"Polo cable knit collar soft sweater.jpg"},{"img":"Sweater.jpg"},{"img":"sweater.jpg"},{"img":"Sweaterr .jpg"}]'>
+                <div class="product-card" onclick="openP('Polo cable knit sweater', 'clothe', 3000)" data-variants='[{"name":"1","img":"Polo cable knit collar soft sweater.jpg"},{"name":"2","img":"Sweater.jpg"},{"name":"3","img":"sweater.jpg"},{"name":"4","img":"Sweaterr .jpg"}]'>
                     <div class="img-area"><img src="Polo cable knit collar soft sweater.jpg"></div>
                     <div class="info-area"><h3>Polo cable knit sweater</h3><div class="new-p">3,000 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Versatile Polo Cable-Knit Sweater', 'clothe', 3500)" data-variants='[{"img":"Versatile Polo Cable-Knit Sweater.jpg"},{"img":"Blue .jpg"},{"img":"Black.jpg"},{"img":"Dark brown .jpg"}]'>
+                <div class="product-card" onclick="openP('Versatile Polo Cable-Knit Sweater', 'clothe', 3500)" data-variants='[{"name":"1","img":"Versatile Polo Cable-Knit Sweater.jpg"},{"name":"2","img":"Blue .jpg"},{"name":"3","img":"Black.jpg"},{"name":"4","img":"Dark brown .jpg"}]'>
                     <div class="img-area"><img src="Versatile Polo Cable-Knit Sweater.jpg"></div>
                     <div class="info-area"><h3>Versatile Polo Cable-Knit Sweater</h3><div class="new-p">3,500 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Denim tears Hoodie', 'clothe', 3500)" data-variants='[{"img":"Denim tears Hoodie.jpg"},{"img":"Denim-grey.jpg"},{"img":"Denim red.jpg"}]'>
+                <div class="product-card" onclick="openP('Denim tears Hoodie', 'clothe', 3500)" data-variants='[{"name":"1","img":"Denim tears Hoodie.jpg"},{"name":"2","img":"Denim-grey.jpg"},{"name":"3","img":"Denim red.jpg"}]'>
                     <div class="img-area"><img src="Denim tears Hoodie.jpg"></div>
                     <div class="info-area"><h3>Denim tears Hoodie</h3><div class="new-p">3,500 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Alo official casual half zip sweater', 'clothe', 3000)" data-variants='[{"img":"Alo official casual half zip sweater.jpg"},{"img":"Dark alo .jpg"},{"img":"Cream alo .jpg"},{"img":"Grey alo.jpg"},{"img":"White alo.jpg"},{"img":"Blue alo.jpg"}]'>
+                <div class="product-card" onclick="openP('Alo official casual half zip sweater', 'clothe', 3000)" data-variants='[{"name":"1","img":"Alo official casual half zip sweater.jpg"},{"name":"2","img":"Dark alo .jpg"},{"name":"3","img":"Cream alo .jpg"},{"name":"4","img":"Grey alo.jpg"},{"name":"5","img":"White alo.jpg"},{"name":"6","img":"Blue alo.jpg"}]'>
                     <div class="img-area"><img src="Alo official casual half zip sweater.jpg"></div>
                     <div class="info-area"><h3>Alo official casual half zip sweater</h3><div class="new-p">3,000 ETB</div></div>
                 </div>
@@ -250,15 +246,15 @@
         <div class="category-section">
             <div class="category-title">Jackets 🧥</div>
             <div class="scroll-wrapper">
-                <div class="product-card" onclick="openP('Suede vintage jacket', 'clothe', 2800)" data-variants='[{"img":"Suede vintage jacket.jpg"},{"img":"Dark jacket.jpg"},{"img":"Silver jacket.jpg"}]'>
+                <div class="product-card" onclick="openP('Suede vintage jacket', 'clothe', 2800)" data-variants='[{"name":"1","img":"Suede vintage jacket.jpg"},{"name":"2","img":"Dark jacket.jpg"},{"name":"3","img":"Silver jacket.jpg"}]'>
                     <div class="img-area"><img src="Suede vintage jacket.jpg"></div>
                     <div class="info-area"><h3>Suede vintage jacket</h3><div class="new-p">2,800 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('American Retro Stand-Collar Jacket', 'clothe', 3250)" data-variants='[{"img":"American Retro Stand-Collar Jacket.jpg"},{"img":"Silver.jpg"}]'>
+                <div class="product-card" onclick="openP('American Retro Stand-Collar Jacket', 'clothe', 3250)" data-variants='[{"name":"1","img":"American Retro Stand-Collar Jacket.jpg"},{"name":"2","img":"Silver.jpg"}]'>
                     <div class="img-area"><img src="American Retro Stand-Collar Jacket.jpg"></div>
                     <div class="info-area"><h3>American Retro Stand-Collar Jacket</h3><div class="new-p">3,250 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Lapel Corduroy Pocket Jacket', 'clothe', 3000)" data-variants='[{"img":"Lapel Corduroy Pocket Jacket.jpg"},{"img":"Black jacket.jpg"}]'>
+                <div class="product-card" onclick="openP('Lapel Corduroy Pocket Jacket', 'clothe', 3000)" data-variants='[{"name":"1","img":"Lapel Corduroy Pocket Jacket.jpg"},{"name":"2","img":"Black jacket.jpg"}]'>
                     <div class="img-area"><img src="Lapel Corduroy Pocket Jacket.jpg"></div>
                     <div class="info-area"><h3>Lapel Corduroy Pocket Jacket</h3><div class="new-p">3,000 ETB</div></div> 
                 </div>
@@ -268,31 +264,31 @@
         <div class="category-section">
             <div class="category-title">Jeans & Pants 👖</div>
             <div class="scroll-wrapper">
-                <div class="product-card" onclick="openP('Broken Planet Fleece Sweatpants', 'clothe', 2500)" data-variants='[{"img":"Broken Planet Fleece Sweatpants.jpg"},{"img":"Black sweatpants.jpg"}]'>
+                <div class="product-card" onclick="openP('Broken Planet Fleece Sweatpants', 'clothe', 2500)" data-variants='[{"name":"1","img":"Broken Planet Fleece Sweatpants.jpg"},{"name":"2","img":"Black sweatpants.jpg"}]'>
                     <div class="img-area"><img src="Broken Planet Fleece Sweatpants.jpg"></div>
                     <div class="info-area"><h3>Broken Planet Fleece</h3><div class="new-p">2,500 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Loose Hip-Hop polo Streetwear Sweatpants', 'clothe', 2850)" data-variants='[{"img":"Loose Hip-Hop polo Streetwear Sweatpants.jpg"},{"img":"Polo grey.jpg"},{"img":"Polo white.jpg"}]'>
+                <div class="product-card" onclick="openP('Loose Hip-Hop polo Streetwear Sweatpants', 'clothe', 2850)" data-variants='[{"name":"1","img":"Loose Hip-Hop polo Streetwear Sweatpants.jpg"},{"name":"2","img":"Polo grey.jpg"},{"name":"3","img":"Polo white.jpg"}]'>
                     <div class="img-area"><img src="Loose Hip-Hop polo Streetwear Sweatpants.jpg"></div>
                     <div class="info-area"><h3>Polo Sweatpants</h3><div class="new-p">2,850 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Denim Tears Sweatpants', 'clothe', 2850)" data-variants='[{"img":"Denim Tears Sweatpants.jpg"},{"img":"Grey denim.jpg"}]'>
+                <div class="product-card" onclick="openP('Denim Tears Sweatpants', 'clothe', 2850)" data-variants='[{"name":"1","img":"Denim Tears Sweatpants.jpg"},{"name":"2","img":"Grey denim.jpg"}]'>
                     <div class="img-area"><img src="Denim Tears Sweatpants.jpg"></div>
                     <div class="info-area"><h3>Denim Tears Sweatpants</h3><div class="new-p">2,850 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Cross Pattern Fleece Sweatpants', 'clothe', 3500)" data-variants='[{"img":"Cross Pattern Curved-Leg Fleece Sweatpants.jpg"},{"img":"Grey cross.jpg"}]'>
+                <div class="product-card" onclick="openP('Cross Pattern Fleece Sweatpants', 'clothe', 3500)" data-variants='[{"name":"1","img":"Cross Pattern Curved-Leg Fleece Sweatpants.jpg"},{"name":"2","img":"Grey cross.jpg"}]'>
                     <div class="img-area"><img src="Cross Pattern Curved-Leg Fleece Sweatpants.jpg"></div>
                     <div class="info-area"><h3>Cross Pattern Fleece Sweatpants</h3><div class="new-p">3,500 ETB</div></div>
                 </div> 
-                <div class="product-card" onclick="openP('Elastic casual suit pants', 'clothe', 2850)" data-variants='[{"img":"Elastic casual suit pants.jpg"},{"img":"Grey suit.jpg"},{"img":"White suit.jpg"},{"img":"Black suit.jpg"}]'>
+                <div class="product-card" onclick="openP('Elastic casual suit pants', 'clothe', 2850)" data-variants='[{"name":"1","img":"Elastic casual suit pants.jpg"},{"name":"2","img":"Grey suit.jpg"},{"name":"3","img":"White suit.jpg"},{"name":"4","img":"Black suit.jpg"}]'>
                     <div class="img-area"><img src="Elastic casual suit pants.jpg"></div>
                     <div class="info-area"><h3>Elastic casual suit pants</h3><div class="new-p">2,850 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Wide-Leg Drape Pants', 'clothe', 2850)" data-variants='[{"img":"Wide-Leg Drape Pants.jpg"},{"img":"Dark silverr .jpg"},{"img":"Greyyy.jpg"}]'>
+                <div class="product-card" onclick="openP('Wide-Leg Drape Pants', 'clothe', 2850)" data-variants='[{"name":"1","img":"Wide-Leg Drape Pants.jpg"},{"name":"2","img":"Dark silverr .jpg"},{"name":"3","img":"Greyyy.jpg"}]'>
                     <div class="img-area"><img src="Wide-Leg Drape Pants.jpg"></div>
                     <div class="info-area"><h3>Wide-Leg Drape Pants</h3><div class="new-p">2,850 ETB</div></div>
                </div>
-                <div class="product-card" onclick="openP('Slim-Fit Suit Trousers', 'clothe', 2850)" data-variants='[{"img":"Slim-Fit Suit Trousers.jpg"},{"img":"Blackk .jpg"}]'>
+                <div class="product-card" onclick="openP('Slim-Fit Suit Trousers', 'clothe', 2850)" data-variants='[{"name":"1","img":"Slim-Fit Suit Trousers.jpg"},{"name":"2","img":"Blackk .jpg"}]'>
                     <div class="img-area"><img src="Slim-Fit Suit Trousers.jpg"></div>
                     <div class="info-area"><h3>Slim-Fit Suit Trousers</h3><div class="new-p">2,850 ETB</div></div>
                 </div>
@@ -306,15 +302,15 @@
                     <div class="img-area"><img src="Essentials-Style Tracksuit.jpg"></div>
                     <div class="info-area"><h3>Essentials-Style Tracksuit</h3><div class="new-p">7,000 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Denim tears-Style tracksuit', 'clothe', 7000)" data-variants='[{"img":"Denim tears-Style tracksuit.WEBP"},{"img":"Grey Set- denim.JPG"}]'>
+                <div class="product-card" onclick="openP('Denim tears-Style tracksuit', 'clothe', 7000)" data-variants='[{"name":"1","img":"Denim tears-Style tracksuit.WEBP"},{"name":"2","img":"Grey Set- denim.JPG"}]'>
                     <div class="img-area"><img src="Denim tears-Style tracksuit.WEBP"></div>
                     <div class="info-area"><h3>Denim tears-Style tracksuit</h3><div class="new-p">7,000 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Chrome Hearts-Style Tracksuit', 'clothe', 7000)" data-variants='[{"img":"Chrome Hearts-Style Tracksuit.jpg"},{"img":"Black cross.jpg"}]'>
+                <div class="product-card" onclick="openP('Chrome Hearts-Style Tracksuit', 'clothe', 7000)" data-variants='[{"name":"1","img":"Chrome Hearts-Style Tracksuit.jpg"},{"name":"2","img":"Black cross.jpg"}]'>
                     <div class="img-area"><img src="Chrome Hearts-Style Tracksuit.jpg"></div>
                     <div class="info-area"><h3>Chrome Hearts-Style Tracksuit</h3><div class="new-p">7,000 ETB</div></div>
                 </div>
-                <div class="product-card" onclick="openP('Denim tears jeans-Style Tracksuit', 'clothe', 7000)" data-variants='[{"img":"Denim tears-Style Tracksuit.jpg"},{"img":"O black.jpg"},{"img":"O dark blue.jpg"},{"img":"O blue.jpg"},{"img":"O light blue .jpg"}]'>
+                <div class="product-card" onclick="openP('Denim tears jeans-Style Tracksuit', 'clothe', 7000)" data-variants='[{"name":"1","img":"Denim tears-Style Tracksuit.jpg"},{"name":"2","img":"O black.jpg"},{"name":"3","img":"O dark blue.jpg"},{"name":"4","img":"O blue.jpg"},{"name":"5","img":"O light blue .jpg"}]'>
                     <div class="img-area"><img src="Denim tears-Style Tracksuit.jpg"></div>
                     <div class="info-area"><h3>Denim tears jeans-Style Tracksuit</h3><div class="new-p">7,000 ETB</div></div>
                 </div>
@@ -383,12 +379,10 @@ window.addEventListener('load', () => {
     }, 3000); 
 });
 
-// UPDATED: Arrow-Based Zoom Control
 function openZoom() {
     zoomIdx = 0;
     const activeVarIdx = Array.from(document.querySelectorAll('.variant-item')).findIndex(el => el.classList.contains('active'));
     if(activeVarIdx !== -1) zoomIdx = activeVarIdx;
-    
     updateZoomImage();
     document.getElementById("zoom-container").style.display = "flex";
     document.documentElement.classList.add('modal-open');
@@ -404,19 +398,11 @@ function changeZoom(dir) {
 
 function updateZoomImage() {
     const zoomImg = document.getElementById("zoom-img");
-    if(currentVariants.length > 0) {
-        zoomImg.src = currentVariants[zoomIdx].img;
-    } else {
-        zoomImg.src = document.getElementById("modal-img").src;
-        document.querySelectorAll('.zoom-arrow').forEach(a => a.style.display = 'none');
-    }
+    if(currentVariants.length > 0) { zoomImg.src = currentVariants[zoomIdx].img; } 
+    else { zoomImg.src = document.getElementById("modal-img").src; document.querySelectorAll('.zoom-arrow').forEach(a => a.style.display = 'none'); }
 }
 
-function closeZoom() {
-    document.getElementById("zoom-container").style.display = "none";
-}
-
-// UPDATED: About Us Logic
+function closeZoom() { document.getElementById("zoom-container").style.display = "none"; }
 function openAbout() { document.getElementById('aboutPage').style.display = 'block'; document.documentElement.classList.add('modal-open'); }
 function closeAbout() { document.getElementById('aboutPage').style.display = 'none'; document.documentElement.classList.remove('modal-open'); }
 
@@ -426,15 +412,12 @@ function openP(n, t, price) {
     document.getElementById("m-price").innerText = price.toLocaleString() + " ETB";
     const clickedCard = event.currentTarget;
     document.getElementById("modal-img").src = clickedCard.querySelector('img').src;
-
     document.documentElement.classList.add('modal-open');
     document.body.classList.add('modal-open');
-
     const variantList = document.getElementById("variant-list");
     variantList.innerHTML = "";
     const variantsData = clickedCard.getAttribute('data-variants');
     currentVariants = variantsData ? JSON.parse(variantsData) : [];
-
     if(currentVariants.length > 0) {
         document.getElementById("variant-area").style.display = "block";
         currentVariants.forEach((v, idx) => {
@@ -445,14 +428,12 @@ function openP(n, t, price) {
                 document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
             };
-            item.innerHTML = `<img src="${v.img}">`;
+            // Paste logic from code 2: Adding the hidden span for variant name
+            let nameHtml = (v.name && v.name.trim() !== "") ? `<span>${v.name}</span>` : "";
+            item.innerHTML = `<img src="${v.img}">${nameHtml}`;
             variantList.appendChild(item);
         });
-    } else {
-        document.getElementById("variant-area").style.display = "none";
-    }
-
-    // Recommendation logic
+    } else { document.getElementById("variant-area").style.display = "none"; }
     const recList = document.getElementById("rec-list"); recList.innerHTML = "";
     clickedCard.closest('.category-section').querySelectorAll('.product-card').forEach(prod => {
         if(prod !== clickedCard) {
@@ -462,14 +443,18 @@ function openP(n, t, price) {
             recList.appendChild(item);
         }
     });
-
     let b = document.getElementById("size-box"); b.innerHTML = "";
     (sz[t] || sz.acc).forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
     document.getElementById("pModal").style.display = "block";
 }
 
 function addToCart() {
-    cart.push({ name: currentP, size: document.getElementById("size-box").value, price: currentPrice });
+    let selectedColor = "";
+    // Copy logic from Code 2 to pull the numeric variation name [1, 2, 3]
+    const activeVariant = document.querySelector('.variant-item.active span');
+    if(activeVariant) selectedColor = ` [${activeVariant.innerText}]`;
+    
+    cart.push({ name: currentP + selectedColor, size: document.getElementById("size-box").value, price: currentPrice });
     updateCartDisplay(); closeModal();
     const toast = document.getElementById("added-toast");
     document.getElementById("toast-text").innerHTML = `<strong>${currentP}</strong> Added`;
@@ -501,10 +486,8 @@ function submitOrder() {
     const p = document.getElementById('custPhone').value;
     const a = document.getElementById('custAddress').value;
     if(!n || !p || !a) return alert("Fill all details!");
-    
     let itemsStr = cart.map(i => `▫️ ${i.name} (${i.size})`).join("\n");
     let text = `🛍️ *NEW ORDER*\n👤 ${n}\n📞 ${p}\n📍 ${a}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
-    
     fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })

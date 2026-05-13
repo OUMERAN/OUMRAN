@@ -18,6 +18,9 @@
             align-items: center; 
         }
 
+        /* FIX: Class to hide the bracketed number from customers */
+        .admin-only { display: none; }
+
         .site-wrapper { width: 100%; max-width: 1400px; margin: 0 auto; }
 
         html.loading, body.loading, html.modal-open, body.modal-open { 
@@ -513,7 +516,8 @@ function openP(n, t, price) {
                 document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
             };
-            // Paste logic from code 2: Adding the hidden span for variant name
+            
+            /* FIX: Keep numeric name in a hidden span for internal logic */
             let nameHtml = (v.name && v.name.trim() !== "") ? `<span>${v.name}</span>` : "";
             item.innerHTML = `<img src="${v.img}">${nameHtml}`;
             variantList.appendChild(item);
@@ -534,12 +538,22 @@ function openP(n, t, price) {
 }
 
 function addToCart() {
-    let selectedColor = "";
-    // Copy logic from Code 2 to pull the numeric variation name [1, 2, 3]
-    const activeVariant = document.querySelector('.variant-item.active span');
-    if(activeVariant) selectedColor = ` [${activeVariant.innerText}]`;
+    let internalColor = "";
+    let displayColor = "";
     
-    cart.push({ name: currentP + selectedColor, size: document.getElementById("size-box").value, price: currentPrice });
+    const activeVariantSpan = document.querySelector('.variant-item.active span');
+    if(activeVariantSpan) {
+        /* FIX: Wrap the variant number in 'admin-only' class so it's hidden in the Bag */
+        displayColor = ` <span class="admin-only">[${activeVariantSpan.innerText}]</span>`;
+        internalColor = ` [${activeVariantSpan.innerText}]`;
+    }
+    
+    cart.push({ 
+        name: currentP + displayColor, 
+        internalName: currentP + internalColor, /* Used for Telegram text */
+        size: document.getElementById("size-box").value, 
+        price: currentPrice 
+    });
     updateCartDisplay(); closeModal();
     const toast = document.getElementById("added-toast");
     document.getElementById("toast-text").innerHTML = `<strong>${currentP}</strong> Added`;
@@ -558,6 +572,7 @@ function showCart() {
     let total = 0;
     document.getElementById("cart-items-list").innerHTML = cart.map((item, i) => {
         total += item.price;
+        /* item.name contains the hidden span, so customers won't see [1] here */
         return `<div class="cart-item"><span><strong>${item.name}</strong> (${item.size})<br>${item.price.toLocaleString()} ETB</span><button class="remove-btn" onclick="removeItem(${i})">REMOVE</button></div>`;
     }).join("");
     document.getElementById("cart-total").innerText = total.toLocaleString();
@@ -571,8 +586,11 @@ function submitOrder() {
     const p = document.getElementById('custPhone').value;
     const a = document.getElementById('custAddress').value;
     if(!n || !p || !a) return alert("Fill all the details first!");
-    let itemsStr = cart.map(i => `▫️ ${i.name} (${i.size})`).join("\n");
+    
+    /* FIX: Use 'internalName' so the variant number [1] shows up in Telegram correctly */
+    let itemsStr = cart.map(i => `▫️ ${i.internalName} (${i.size})`).join("\n");
     let text = `🛍️ *NEW ORDER*\n👤 ${n}\n📞 ${p}\n📍 ${a}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
+    
     fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })

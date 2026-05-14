@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="loading"> <!-- Added loading class here -->
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,6 +9,14 @@
     <style>
         :root { --bg: #000; --card: #1a1a1a; --tg: #0088cc; --accent: #ff3b30; --gold: #FFD700; --beige: #d4c5b0; }
         
+        /* FIX: Lock scroll when loading class is present */
+        html.loading, body.loading {
+            overflow: hidden !important;
+            height: 100% !important;
+            position: fixed;
+            width: 100%;
+        }
+
         body { 
             font-family: 'Inter', -apple-system, sans-serif; 
             margin:0; background: var(--bg); color: white; 
@@ -151,7 +159,7 @@
         }
     </style>
 </head>
-<body class="loading">
+<body class="loading"> <!-- Body already has loading class -->
 
 <div id="zoom-container">
     <div class="zoom-stage">
@@ -483,8 +491,10 @@ let scrollPos = 0; // FIX: Track scroll position
 
 window.addEventListener('load', () => {
     loadCart();
+    // Splash screen logic updated to unlock scrolling only after exit
     setTimeout(() => {
         document.getElementById('splash-screen').classList.add('splash-exit');
+        // Unlocks scrolling
         document.documentElement.classList.remove('loading');
         document.body.classList.remove('loading');
     }, 3000); 

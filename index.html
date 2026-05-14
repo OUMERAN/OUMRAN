@@ -12,19 +12,22 @@
         body { 
             font-family: 'Inter', -apple-system, sans-serif; 
             margin:0; background: var(--bg); color: white; 
-            overflow-x: hidden; position: relative; min-height: 100vh;
+            overflow-x: hidden; 
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center; 
         }
 
-        /* FIX: Class to hide the bracketed number from customers */
+        /* FIX: Ensure content is never cut off at bottom */
+        .site-wrapper { width: 100%; max-width: 1400px; margin: 0 auto; display: block; }
+
         .admin-only { display: none; }
 
-        .site-wrapper { width: 100%; max-width: 1400px; margin: 0 auto; }
-
-        html.loading, body.loading, html.modal-open, body.modal-open { 
-            overflow: hidden !important; height: 100% !important; position: fixed; width: 100%; touch-action: none; 
+        /* Updated modal-open logic to prevent scroll reset */
+        html.modal-open, body.modal-open { 
+            overflow: hidden !important;
+            height: auto;
         }
 
         #splash-screen {
@@ -438,7 +441,6 @@
 </p>
             <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;">Payment Instruction:
 Please transfer a 50% deposit via Telebirr to the numbers above to confirm your order. You will pay the remaining ETB in cash/via telebirr when your order arrives at your door.</span>
-            </div>
             <button class="btn" onclick="submitOrder()">Confirm Order</button>
             <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closeCart()">Close</button>
         </div>
@@ -471,12 +473,13 @@ Please transfer a 50% deposit via Telebirr to the numbers above to confirm your 
             </button>
         </div>
     </div>
-    
+</div>
 
 <script>
 let cart = [];
 const sz = { clothe: ["M", "L", "XL", "XXL"], shoes: ["40", "41", "42", "43", "44", "45"], acc: ["Standard"] };
 let currentP = ""; let currentPrice = 0; let currentVariants = []; let zoomIdx = 0;
+let scrollPos = 0; // FIX: Track scroll position
 
 window.addEventListener('load', () => {
     loadCart();
@@ -511,10 +514,19 @@ function updateZoomImage() {
 }
 
 function closeZoom() { document.getElementById("zoom-container").style.display = "none"; }
-function openAbout() { document.getElementById('aboutPage').style.display = 'block'; document.documentElement.classList.add('modal-open'); }
-function closeAbout() { document.getElementById('aboutPage').style.display = 'none'; document.documentElement.classList.remove('modal-open'); }
+function openAbout() { 
+    scrollPos = window.pageYOffset; // Save position
+    document.getElementById('aboutPage').style.display = 'block'; 
+    document.documentElement.classList.add('modal-open'); 
+}
+function closeAbout() { 
+    document.getElementById('aboutPage').style.display = 'none'; 
+    document.documentElement.classList.remove('modal-open'); 
+    window.scrollTo(0, scrollPos); // Restore position
+}
 
 function openP(n, t, price) {
+    scrollPos = window.pageYOffset; // FIX: Save position before opening modal
     currentP = n; currentPrice = price;
     document.getElementById("m-name").innerText = n;
     document.getElementById("m-price").innerText = price.toLocaleString() + " ETB";
@@ -536,8 +548,6 @@ function openP(n, t, price) {
                 document.querySelectorAll('.variant-item').forEach(el => el.classList.remove('active'));
                 this.classList.add('active');
             };
-            
-            /* FIX: Keep numeric name in a hidden span for internal logic */
             let nameHtml = (v.name && v.name.trim() !== "") ? `<span>${v.name}</span>` : "";
             item.innerHTML = `<img src="${v.img}">${nameHtml}`;
             variantList.appendChild(item);
@@ -560,17 +570,14 @@ function openP(n, t, price) {
 function addToCart() {
     let internalColor = "";
     let displayColor = "";
-    
     const activeVariantSpan = document.querySelector('.variant-item.active span');
     if(activeVariantSpan) {
-        /* FIX: Wrap the variant number in 'admin-only' class so it's hidden in the Bag */
         displayColor = ` <span class="admin-only">[${activeVariantSpan.innerText}]</span>`;
         internalColor = ` [${activeVariantSpan.innerText}]`;
     }
-    
     cart.push({ 
         name: currentP + displayColor, 
-        internalName: currentP + internalColor, /* Used for Telegram text */
+        internalName: currentP + internalColor,
         size: document.getElementById("size-box").value, 
         price: currentPrice 
     });
@@ -588,11 +595,11 @@ function updateCartDisplay() {
 }
 
 function showCart() {
+    scrollPos = window.pageYOffset; // Save position
     document.documentElement.classList.add('modal-open');
     let total = 0;
     document.getElementById("cart-items-list").innerHTML = cart.map((item, i) => {
         total += item.price;
-        /* item.name contains the hidden span, so customers won't see [1] here */
         return `<div class="cart-item"><span><strong>${item.name}</strong> (${item.size})<br>${item.price.toLocaleString()} ETB</span><button class="remove-btn" onclick="removeItem(${i})">REMOVE</button></div>`;
     }).join("");
     document.getElementById("cart-total").innerText = total.toLocaleString();
@@ -606,11 +613,8 @@ function submitOrder() {
     const p = document.getElementById('custPhone').value;
     const a = document.getElementById('custAddress').value;
     if(!n || !p || !a) return alert("Fill all the details first!");
-    
-    /* FIX: Use 'internalName' so the variant number [1] shows up in Telegram correctly */
     let itemsStr = cart.map(i => `▫️ ${i.internalName} (${i.size})`).join("\n");
     let text = `🛍️ *NEW ORDER*\n👤 ${n}\n📞 ${p}\n📍 ${a}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
-    
     fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })
@@ -621,8 +625,17 @@ function submitOrder() {
     });
 }
 
-function closeModal() { document.documentElement.classList.remove('modal-open'); document.body.classList.remove('modal-open'); document.getElementById("pModal").style.display = "none"; }
-function closeCart() { document.documentElement.classList.remove('modal-open'); document.getElementById("cartModal").style.display = "none"; }
+function closeModal() { 
+    document.documentElement.classList.remove('modal-open'); 
+    document.body.classList.remove('modal-open'); 
+    document.getElementById("pModal").style.display = "none"; 
+    window.scrollTo(0, scrollPos); // FIX: Restore position after closing
+}
+function closeCart() { 
+    document.documentElement.classList.remove('modal-open'); 
+    document.getElementById("cartModal").style.display = "none"; 
+    window.scrollTo(0, scrollPos); // Restore position
+}
 function loadCart() { const s = localStorage.getItem('oumer_cart'); if(s) { cart = JSON.parse(s); updateCartDisplay(); } }
 function filterProducts() {
     let input = document.getElementById('search-input').value.toLowerCase();

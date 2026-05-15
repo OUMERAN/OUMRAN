@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en" class="loading"> <!-- Added loading class here -->
 <head>
@@ -228,7 +229,7 @@
 
     <div class="promo-bar">
         VENDOR FROM CHINA🇨🇳✈️ | PREMIUM QUALITY<br>
-        Available in Addis Ababa Only<br>
+        NOT GLOBAL❌ ONLY IN ADDIS ABABA✅<br>
         <span class="about-link" onclick="openAbout()">About OUMRAN STORE</span>
     </div>
 
@@ -640,39 +641,19 @@ function submitOrder() {
     const n = document.getElementById('custName').value;
     const p = document.getElementById('custPhone').value;
     const a = document.getElementById('custAddress').value;
-
-    if(!n || !p || !a) {
-        return alert("Fill all the details first!");
-    }
-
-    let itemsStr = cart.map(i =>
-        `▫️ ${i.internalName} (${i.size})`
-    ).join("\n");
-
-    let text =
-`🛍️ NEW ORDER
-👤 ${n}
-📞 ${p}
-📍 ${a}
-
-📦 ITEMS:
-${itemsStr}
-
-💰 TOTAL: ${document.getElementById("cart-total").innerText} ETB`;
-
-    let msg = encodeURIComponent(text);
-
-    window.open(
-        `https://t.me/OUMER_FETE?text=${msg}`,
-        "_blank"
-    );
-
-    document.getElementById("cartModal").style.display = "none";
-    document.getElementById("successModal").style.display = "block";
-
-    cart = [];
-    updateCartDisplay();
+    if(!n || !p || !a) return alert("Fill all the details first!");
+    let itemsStr = cart.map(i => `▫️ ${i.internalName} (${i.size})`).join("\n");
+    let text = `🛍️ *NEW ORDER*\n👤 ${n}\n📞 ${p}\n📍 ${a}\n\n📦 *Items:*\n${itemsStr}\n\n💰 *Total:* ${document.getElementById("cart-total").innerText} ETB`;
+    fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })
+    }).then(() => {
+        document.getElementById("cartModal").style.display = "none";
+        document.getElementById("successModal").style.display = "block";
+        cart = []; updateCartDisplay();
+    });
 }
+
 function closeModal() { 
     document.documentElement.classList.remove('modal-open'); 
     document.body.classList.remove('modal-open'); 

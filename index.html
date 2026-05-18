@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" class="loading"> <!-- Added loading class here -->
 <head>
@@ -406,10 +405,9 @@
         </p>
     </div>
 
-    <a href="https://t.me/OUMER_FETE" style="color: #fff; text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border-bottom: 1px solid #d4af37; padding-bottom: 8px; font-weight: 600; display: inline-block; position: relative; z-index: 10;">
-       
-Submit a Private Request →
-    </a>
+    <button onclick="openPrivateSourcing()" style="background: none; border: none; color: #fff; text-decoration: none; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; border-bottom: 1px solid #d4af37; padding-bottom: 8px; font-weight: 600; display: inline-block; position: relative; z-index: 10; cursor: pointer;">
+       Submit a Private Request →
+    </button>
 
 </section>
 
@@ -434,6 +432,44 @@ Submit a Private Request →
 
             <div class="rec-title">You May Also Like</div>
             <div id="rec-list" class="rec-scroll"></div>
+        </div>
+    </div>
+
+    <!-- PRIVATE REQUEST INTAKE MODAL -->
+    <div id="privateSourcingModal" class="modal">
+        <div class="modal-content" style="background: #1a1a1a; border: 1px solid #333;">
+            <h2 style="margin-top:0; font-family: 'Playfair Display', serif; color: #fff; letter-spacing: 1px;">Sourcing Intake 🌐</h2>
+            <p style="font-size: 11px; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;">Private Concierge Service</p>
+            
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px;">Client Profile Name</label>
+            <input type="text" id="srcClientName" placeholder="Your Full Name" class="order-input">
+
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Contact Number</label>
+            <input type="tel" id="srcClientPhone" placeholder="Phone Number" class="order-input">
+            
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Item Classification</label>
+            <select id="srcCategory" class="order-input" style="background: #000; color: white;">
+                <option value="Clothes">Clothes / Apparel</option>
+                <option value="Shoes">Shoes / Sneakers</option>
+                <option value="Watch">Watch / Horology</option>
+                <option value="Bag">Bag / Luxury Leather</option>
+                <option value="Other">Other Premium Goods</option>
+            </select>
+
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Product Name & Details</label>
+            <input type="text" id="srcProductName" placeholder="Brand, Model, Release Year, etc." class="order-input">
+
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Required Sizing</label>
+            <input type="text" id="srcSize" placeholder="Your size (e.g., XL, 43, Standard)" class="order-input">
+
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Preferred Allocation Budget</label>
+            <input type="text" id="srcBudget" placeholder="Estimated Budget in ETB (Optional)" class="order-input">
+
+            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Reference Link / Image Description</label>
+            <textarea id="srcReference" placeholder="Paste link to reference image, or details about the configuration/colorway" class="order-input" style="height: 80px; font-family: inherit; resize: none;"></textarea>
+
+            <button class="btn" style="background: var(--gold); color: #000;" onclick="submitPrivateRequest()">Send to Concierge Network</button>
+            <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closePrivateSourcing()">Cancel</button>
         </div>
     </div>
 
@@ -496,7 +532,7 @@ Please transfer a 50% deposit via Telebirr to the numbers above to confirm your 
                 See you on Telegram!
             </p>
 
-            <button class="btn" onclick="window.location.href='@OUMER_FETE'" style="display: inline-block; background-color: #ffffff; color: #000000; padding: 15px 45px; border: none; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer;">
+            <button class="btn" onclick="window.location.href='https://t.me/OUMER_FETE'" style="display: inline-block; background-color: #ffffff; color: #000000; padding: 15px 45px; border: none; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; cursor: pointer;">
                 Open Telegram
             </button>
         </div>
@@ -676,6 +712,63 @@ function filterProducts() {
             else card.style.display="none";
         });
         sec.style.display = match ? "block" : "none";
+    });
+}
+
+/* PRIVATE SOURCING LOGIC PATHWAYS */
+function openPrivateSourcing() {
+    scrollPos = window.pageYOffset;
+    document.documentElement.classList.add('modal-open');
+    document.body.classList.add('modal-open');
+    document.getElementById("privateSourcingModal").style.display = "block";
+}
+
+function closePrivateSourcing() {
+    document.documentElement.classList.remove('modal-open');
+    document.body.classList.remove('modal-open');
+    document.getElementById("privateSourcingModal").style.display = "none";
+    window.scrollTo(0, scrollPos);
+}
+
+function submitPrivateRequest() {
+    const clientName = document.getElementById('srcClientName').value;
+    const clientPhone = document.getElementById('srcClientPhone').value;
+    const category = document.getElementById('srcCategory').value;
+    const productName = document.getElementById('srcProductName').value;
+    const size = document.getElementById('srcSize').value;
+    const budget = document.getElementById('srcBudget').value || "Not Specified";
+    const reference = document.getElementById('srcReference').value || "None Provided";
+
+    if(!clientName || !clientPhone || !productName || !size) {
+        return alert("Please fulfill your profile name, contact number, requested item, and sizing configurations.");
+    }
+
+    let text = `🌐 *PRIVATE SOURCING REQUEST*\n\n` +
+               `👤 *Client:* ${clientName}\n` +
+               `📞 *Contact:* ${clientPhone}\n\n` +
+               `📦 *Classification:* ${category}\n` +
+               `🏷️ *Product Name:* ${productName}\n` +
+               `📐 *Size Required:* ${size}\n` +
+               `💰 *Target Budget:* ${budget}\n\n` +
+               `🔗 *Reference/Notes:* ${reference}`;
+
+    fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
+        method: "POST", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })
+    }).then(() => {
+        document.getElementById("privateSourcingModal").style.display = "none";
+        document.getElementById("successModal").style.display = "block";
+        
+        // Reset Sourcing form fields
+        document.getElementById('srcClientName').value = "";
+        document.getElementById('srcClientPhone').value = "";
+        document.getElementById('srcProductName').value = "";
+        document.getElementById('srcSize').value = "";
+        document.getElementById('srcBudget').value = "";
+        document.getElementById('srcReference').value = "";
+    }).catch(err => {
+        alert("An error occurred during secure transport transmission. Please attempt connection layout again.");
     });
 }
 </script>

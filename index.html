@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="loading"> <!-- Added loading class here -->
-<head>
+<html lang="en" class="loading"> <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OUMRAN STORE</title>
@@ -159,9 +158,7 @@
         }
     </style>
 </head>
-<body class="loading"> <!-- Body already has loading class -->
-
-<div id="zoom-container">
+<body class="loading"> <div id="zoom-container">
     <div class="zoom-stage">
         <button class="zoom-arrow arrow-left" onclick="changeZoom(-1)">&lt;</button>
         <img id="zoom-img" src="" alt="Zoomed Product">
@@ -172,7 +169,7 @@
 
 <div id="aboutPage">
     <div class="about-content">
-        <h1 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 5px;">About OUMRAN STORE</h1>
+        <h2 style="font-family: 'Playfair Display', serif; color: var(--gold); margin-bottom: 5px;">About OUMRAN STORE</h2>
         <h3 style="font-family: 'Playfair Display', serif; color: #aaa; margin-bottom: 30px; letter-spacing: 2px; font-size: 14px;">THE GOLD STANDARD OF FASHION</h3>
 
         <div style="margin-bottom: 25px;">
@@ -237,7 +234,6 @@
     </div>
 
     <main id="store-main">
-        <!-- FIXED VARIANT DATA NAMES -->
         <div class="category-section">
             <div class="category-title">Graphic T-Shirts 👕</div>
             <div class="scroll-wrapper"> 
@@ -247,7 +243,7 @@
                 </div>
                <div class="product-card" onclick="openP('Premium Floral Short Sleeve', 'clothe', 1800)" data-variants='[{"name":"1","img":"Premium Floral Short Sleeve.jpg"},{"name":"2","img":"Floral black.jpg"}]'>
                     <div class="img-area"><img src="Premium Floral Short Sleeve.jpg"></div>
-                    <div class="info-area"><h3>Premium Floral Short Sleeve</h3></h3><div class="new-p">1,800 ETB</div></div> 
+                    <div class="info-area"><h3>Premium Floral Short Sleeve</h3><div class="new-p">1,800 ETB</div></div> 
                 </div>
                <div class="product-card" onclick="openP('Half zipped black t-shirt', 'clothe', 1800)" data-variants='[{"name":"1","img":"Half zipped black t-shirt.jpg"},{"name":"2","img":"White .jpg"}]'>
                     <div class="img-area"><img src="Half zipped black t-shirt.jpg"></div>
@@ -371,7 +367,7 @@
                 </div>
                 <div class="product-card" onclick="openP('Mertra Embroidered Fleece-Style Tracksuit', 'clothe', 7000)" data-variants='[{"name":"1","img":"Mertra Embroidered Fleece-Style Tracksuit.jpg"},{"name":"2","img":"Metra black .jpg"}]'>
                     <div class="img-area"><img src="Mertra Embroidered Fleece-Style Tracksuit.jpg"></div>
-                    <div class="info-area"><h3>Mertra Embroidered Fleece-Style Tracksuit</h3></h3><div class="new-p">7,000 ETB</div></div>
+                    <div class="info-area"><h3>Mertra Embroidered Fleece-Style Tracksuit</h3><div class="new-p">7,000 ETB</div></div>
                </div>
                 <div class="product-card" onclick="openP('Mertra High-Street Heritage Set-Style Tracksuit', 'clothe', 7000)" data-variants='[{"name":"1","img":"Mertra High-Street Heritage Set-Style Tracksuit.jpg"},{"name":"2","img":"Metru black.jpg"}]'>
                     <div class="img-area"><img src="Mertra High-Street Heritage Set-Style Tracksuit.jpg"></div>
@@ -435,7 +431,6 @@
         </div>
     </div>
 
-    <!-- PRIVATE REQUEST INTAKE MODAL -->
     <div id="privateSourcingModal" class="modal">
         <div class="modal-content" style="background: #1a1a1a; border: 1px solid #333;">
             <h2 style="margin-top:0; font-family: 'Playfair Display', serif; color: #fff; letter-spacing: 1px;">Sourcing Intake 🌐</h2>
@@ -466,7 +461,19 @@
             <input type="text" id="srcBudget" placeholder="Estimated Budget in ETB (Optional)" class="order-input">
 
             <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Reference Link / Image Description</label>
-            <textarea id="srcReference" placeholder="Paste link to reference image, or details about the configuration/colorway" class="order-input" style="height: 80px; font-family: inherit; resize: none;"></textarea>
+            <div id="srcReferenceWrapper" style="position: relative; border: 1px solid #444; border-radius: 10px; background-color: #000; margin-top: 10px; padding: 12px; box-sizing: border-box;">
+                <textarea id="srcReference" placeholder="Paste link to reference image, or details about the configuration/colorway" style="width: 100%; background: transparent; border: none; color: #fff; outline: none; font-size: 16px; min-height: 80px; resize: none; font-family: inherit; padding-bottom: 40px; box-sizing: border-box; display: block; margin: 0;"></textarea>
+                
+                <div style="position: absolute; bottom: 10px; right: 12px; left: 12px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #222; padding-top: 8px;">
+                    <div id="srcImagePreviewSlot" style="display: flex; align-items: center;"></div>
+                    
+                    <label for="srcHiddenImageUpload" style="display: flex; align-items: center; gap: 6px; color: #a0a0a0; font-size: 13px; cursor: pointer; transition: color 0.2s; font-family: sans-serif;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+                        <span>Add Photo</span>
+                    </label>
+                    <input type="file" id="srcHiddenImageUpload" accept="image/*" style="display: none;">
+                </div>
+            </div>
 
             <button class="btn" style="background: var(--gold); color: #000;" onclick="submitPrivateRequest()">Send to Concierge Network</button>
             <button class="btn" style="background:#333; color:white; margin-top:10px;" onclick="closePrivateSourcing()">Cancel</button>
@@ -487,8 +494,7 @@
 </p>
             <span style="font-size: 11px; color: #aaa; display: block; margin-top: 5px;">Payment Instruction:
 Please transfer a 50% deposit via Telebirr to the numbers above to confirm your order. You will pay the remaining ETB in cash/via telebirr when your order arrives at your door.</span>
-            <!-- Clean Luxury Note Section -->
-<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #333; font-family: sans-serif;">
+            <div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #333; font-family: sans-serif;">
     <div style="display: flex; flex-direction: column; gap: 8px;">
         <div style="display: flex; align-items: start; gap: 10px;">
             <span style="color: #ffffff; font-size: 14px;">•</span>
@@ -544,6 +550,7 @@ let cart = [];
 const sz = { clothe: ["M", "L", "XL", "XXL"], shoes: ["40", "41", "42", "43", "44", "45"], acc: ["Standard"] };
 let currentP = ""; let currentPrice = 0; let currentVariants = []; let zoomIdx = 0;
 let scrollPos = 0; // FIX: Track scroll position
+let srcAttachedImageBase64 = ""; // Holds uploaded image string globally
 
 window.addEventListener('load', () => {
     loadCart();
@@ -553,7 +560,10 @@ window.addEventListener('load', () => {
         // Unlocks scrolling
         document.documentElement.classList.remove('loading');
         document.body.classList.remove('loading');
-    }, 3000); 
+    }, 2000); 
+    
+    // Set up paste and attachment image hooks
+    initPrivateSourcingUploads();
 });
 
 function openZoom() {
@@ -730,6 +740,52 @@ function closePrivateSourcing() {
     window.scrollTo(0, scrollPos);
 }
 
+function initPrivateSourcingUploads() {
+    const fileInput = document.getElementById('srcHiddenImageUpload');
+    const previewSlot = document.getElementById('srcImagePreviewSlot');
+    const wrapper = document.getElementById('srcReferenceWrapper');
+
+    function processImageFile(file) {
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                srcAttachedImageBase64 = e.target.result;
+                previewSlot.innerHTML = `
+                    <div style="position: relative; display: inline-block; margin-right: 10px;">
+                        <img src="${e.target.result}" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px; border: 1px solid #333;">
+                        <span id="srcRemovePreviewBtn" style="position: absolute; top: -6px; right: -6px; background: #ff4d4d; color: white; border-radius: 50%; width: 14px; height: 14px; font-size: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-weight: bold; font-family: sans-serif;">×</span>
+                    </div>
+                `;
+                document.getElementById('srcRemovePreviewBtn').addEventListener('click', function(ev) {
+                    ev.preventDefault();
+                    previewSlot.innerHTML = '';
+                    fileInput.value = '';
+                    srcAttachedImageBase64 = "";
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    fileInput.addEventListener('change', function() {
+        processImageFile(this.files[0]);
+    });
+
+    wrapper.addEventListener('paste', function(e) {
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        for (let i in items) {
+            const item = items[i];
+            if (item.kind === 'file') {
+                const blob = item.getAsFile();
+                processImageFile(blob);
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(blob);
+                fileInput.files = dataTransfer.files;
+            }
+        }
+    });
+}
+
 function submitPrivateRequest() {
     const clientName = document.getElementById('srcClientName').value;
     const clientPhone = document.getElementById('srcClientPhone').value;
@@ -752,6 +808,11 @@ function submitPrivateRequest() {
                `💰 *Target Budget:* ${budget}\n\n` +
                `🔗 *Reference/Notes:* ${reference}`;
 
+    // Append visual confirmation tag internally to alert user text file logs
+    if (srcAttachedImageBase64) {
+        text += `\n\n🖼️ *[Photo Attached via Web Dashboard]*`;
+    }
+
     fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
         method: "POST", 
         headers: { "Content-Type": "application/json" },
@@ -767,6 +828,9 @@ function submitPrivateRequest() {
         document.getElementById('srcSize').value = "";
         document.getElementById('srcBudget').value = "";
         document.getElementById('srcReference').value = "";
+        document.getElementById('srcImagePreviewSlot').innerHTML = "";
+        document.getElementById('srcHiddenImageUpload').value = "";
+        srcAttachedImageBase64 = "";
     }).catch(err => {
         alert("An error occurred during secure transport transmission. Please attempt connection layout again.");
     });

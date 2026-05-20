@@ -461,10 +461,10 @@
             <input type="text" id="srcBudget" placeholder="Estimated Budget in ETB (Optional)" class="order-input">
 
             <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Reference Link / Image Description</label>
-            <div id="srcReferenceWrapper" style="position: relative; border: 1px solid #444; border-radius: 10px; background-color: #000; margin-top: 10px; padding: 12px; box-sizing: border-box;">
-                <textarea id="srcReference" placeholder="Paste link to reference image, or details about the configuration/colorway" style="width: 100%; background: transparent; border: none; color: #fff; outline: none; font-size: 16px; min-height: 80px; resize: none; font-family: inherit; padding-bottom: 40px; box-sizing: border-box; display: block; margin: 0;"></textarea>
+            <div id="srcReferenceWrapper" style="position: relative; border: 1px solid #444; border-radius: 10px; background-color: #000; margin-top: 10px; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px;">
+                <textarea id="srcReference" placeholder="Paste link to reference image, or details about the configuration/colorway" style="width: 100%; background: transparent; border: none; color: #fff; outline: none; font-size: 16px; min-height: 80px; resize: none; font-family: inherit; box-sizing: border-box; display: block; margin: 0;"></textarea>
                 
-                <div style="position: absolute; bottom: 10px; right: 12px; left: 12px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #222; padding-top: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #222; padding-top: 8px;">
                     <div id="srcImagePreviewSlot" style="display: flex; align-items: center;"></div>
                     
                     <label for="srcHiddenImageUpload" style="display: flex; align-items: center; gap: 6px; color: #a0a0a0; font-size: 13px; cursor: pointer; transition: color 0.2s; font-family: sans-serif;">
@@ -808,16 +808,39 @@ function submitPrivateRequest() {
                `💰 *Target Budget:* ${budget}\n\n` +
                `🔗 *Reference/Notes:* ${reference}`;
 
-    // Append visual confirmation tag internally to alert user text file logs
+    let apiUrl = `https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`;
+    let formData = null;
+    let postOptions = {};
+
     if (srcAttachedImageBase64) {
-        text += `\n\n🖼️ *[Photo Attached via Web Dashboard]*`;
+        apiUrl = `https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendPhoto`;
+        formData = new FormData();
+        formData.append("chat_id", "5715582254");
+        formData.append("caption", text);
+        formData.append("parse_mode", "Markdown");
+        
+        // Convert base64 data back to file blob for authentic upload payload
+        const base64Parts = srcAttachedImageBase64.split(',');
+        const mimeType = base64Parts[0].match(/:(.*?);/)[1];
+        const binaryStr = atob(base64Parts[1]);
+        let n = binaryStr.length;
+        const u8arr = new Uint8Array(n);
+        while(n--) {
+            u8arr[n] = binaryStr.charCodeAt(n);
+        }
+        const fileBlob = new Blob([u8arr], { type: mimeType });
+        formData.append("photo", fileBlob, "upload.jpg");
+        
+        postOptions = { method: "POST", body: formData };
+    } else {
+        postOptions = {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })
+        };
     }
 
-    fetch(`https://api.telegram.org/bot8406824466:AAHb2pnbptwRyqRF3u0349emh09o_ZUgbwc/sendMessage`, {
-        method: "POST", 
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ chat_id: "5715582254", text: text, parse_mode: "Markdown" })
-    }).then(() => {
+    fetch(apiUrl, postOptions).then(() => {
         document.getElementById("privateSourcingModal").style.display = "none";
         document.getElementById("successModal").style.display = "block";
         

@@ -454,8 +454,10 @@
             <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Product Name & Details</label>
             <input type="text" id="srcProductName" placeholder="Brand, Model, Release Year, etc." class="order-input">
 
-            <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Required Sizing</label>
-            <input type="text" id="srcSize" placeholder="Your size (e.g., XL, 43, Standard)" class="order-input">
+            <div id="srcSizeWrapper">
+                <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Required Sizing</label>
+                <input type="text" id="srcSize" placeholder="Your size (e.g., XL, 43, Standard)" class="order-input">
+            </div>
 
             <label style="font-size: 11px; font-weight: bold; color: #999; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 15px; display: block;">Preferred Allocation Budget</label>
             <input type="text" id="srcBudget" placeholder="Estimated Budget in ETB (Optional)" class="order-input">
@@ -638,8 +640,18 @@ function openP(n, t, price) {
             recList.appendChild(item);
         }
     });
+    
+    // ADJUSTED TO AUTOMATICALLY HIDE SIZE SELECTOR AND LABEL FOR ACCESSORIES / WATCHES
     let b = document.getElementById("size-box"); b.innerHTML = "";
     (sz[t] || sz.acc).forEach(s => { let o = document.createElement("option"); o.text = s; b.add(o); });
+    if (t === 'acc' || !sz[t]) {
+        b.style.display = "none";
+        b.previousElementSibling.style.display = "none";
+    } else {
+        b.style.display = "block";
+        b.previousElementSibling.style.display = "block";
+    }
+    
     document.getElementById("pModal").style.display = "block";
 }
 
@@ -744,6 +756,21 @@ function initPrivateSourcingUploads() {
     const fileInput = document.getElementById('srcHiddenImageUpload');
     const previewSlot = document.getElementById('srcImagePreviewSlot');
     const wrapper = document.getElementById('srcReferenceWrapper');
+
+    // DYNAMIC WATCH CATEGORY EVENT LISTENER FOR SOURCING FORM
+    const srcCategory = document.getElementById('srcCategory');
+    const srcSizeWrapper = document.getElementById('srcSizeWrapper');
+    const srcSizeInput = document.getElementById('srcSize');
+
+    srcCategory.addEventListener('change', function() {
+        if (this.value === 'Watch') {
+            srcSizeWrapper.style.display = 'none';
+            srcSizeInput.value = 'Standard'; // Pre-fills field so form logic passes
+        } else {
+            srcSizeWrapper.style.display = 'block';
+            if (srcSizeInput.value === 'Standard') srcSizeInput.value = '';
+        }
+    });
 
     function processImageFile(file) {
         if (file && file.type.startsWith('image/')) {
